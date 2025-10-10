@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:id="@+id/img_scan_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trach_on_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/back_icon_b"
+        android:drawablePadding="12dp"
+        android:text="Scannning"
+        android:textColor="#FFFFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_back">
+
+        <TextView
+            android:id="@+id/tv_scanned_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="321"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_scanned_size_un"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MB"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <!-- Categories RecyclerView -->
+    <TextView
+        android:id="@+id/tv_scanning_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Scanning: /Storage/Downloads/Temp Files"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_scaning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="#FFFFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/img_scan_bg"
+        app:trackColor="#000000"
+        app:trackCornerRadius="8dp"
+        app:trackThickness="4dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_clean_now"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_scan_bg"
+        tools:listitem="@layout/item_category" />
+
+    <!-- Clean Now Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_clean_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginBottom="16sp"
+        android:paddingVertical="12dp"
+        android:text="Clean Now"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        app:backgroundTint="#89ECFF"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_categories" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
