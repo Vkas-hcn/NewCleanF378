@@ -43,7 +43,7 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>
-        <activity android:name=".NcTrans"
+        <activity android:name=".qlwj.NcTrans"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>
@@ -57,7 +57,7 @@
             android:launchMode="singleTop"
             android:exported="true"/>
 
-        <activity android:name=".NcChong"
+        <activity android:name=".cf.NcChong"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>

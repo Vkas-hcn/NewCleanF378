@@ -1,19 +1,25 @@
-package com.desolation.spreads.reach
+package com.desolation.spreads.reach.qlwj
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.desolation.spreads.reach.qlwj.FileScanAdapter
+import com.desolation.spreads.reach.R
 import com.desolation.spreads.reach.databinding.ItemCategoryBinding
-
 
 class CategoryAdapter(
     private val categories: List<TrashCategory>,
     private val onSelectionChanged: () -> Unit
-) : androidx.recyclerview.widget.RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     class CategoryViewHolder(val binding: ItemCategoryBinding) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): CategoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding = ItemCategoryBinding.inflate(
-            android.view.LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context), parent, false
         )
         return CategoryViewHolder(binding)
     }
@@ -34,18 +40,18 @@ class CategoryAdapter(
             )
 
             if (category.isExpanded) {
-                rvItemFile.visibility = android.view.View.VISIBLE
+                rvItemFile.visibility = View.VISIBLE
                 val fileAdapter = FileScanAdapter(category.files) {
                     updateCategorySelection(category)
                     notifyItemChanged(position)
                     onSelectionChanged()
                 }
                 rvItemFile.apply {
-                    layoutManager = androidx.recyclerview.widget.LinearLayoutManager(holder.itemView.context)
+                    layoutManager = LinearLayoutManager(holder.itemView.context)
                     adapter = fileAdapter
                 }
             } else {
-                rvItemFile.visibility = android.view.View.GONE
+                rvItemFile.visibility = View.GONE
             }
 
             llCategory.setOnClickListener {

@@ -1,19 +1,22 @@
-package com.desolation.spreads.reach
+package com.desolation.spreads.reach.qlwj
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.desolation.spreads.reach.R
 import com.desolation.spreads.reach.databinding.ItemFileBinding
-
 
 class FileScanAdapter(
     private val files: List<TrashFile>,
     private val onSelectionChanged: () -> Unit
-) : androidx.recyclerview.widget.RecyclerView.Adapter<FileScanAdapter.FileViewHolder>() {
+) : RecyclerView.Adapter<FileScanAdapter.FileViewHolder>() {
 
     class FileViewHolder(val binding: ItemFileBinding) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): FileViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FileViewHolder {
         val binding = ItemFileBinding.inflate(
-            android.view.LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context), parent, false
         )
         return FileViewHolder(binding)
     }

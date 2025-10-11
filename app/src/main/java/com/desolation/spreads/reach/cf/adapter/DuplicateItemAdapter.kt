@@ -1,12 +1,12 @@
-package com.desolation.spreads.reach.adapter
+package com.desolation.spreads.reach.cf.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.desolation.spreads.reach.R
 import com.desolation.spreads.reach.databinding.ItemDuplicateItemBinding
-import com.desolation.spreads.reach.model.DuplicateFile
-import com.desolation.spreads.reach.utils.FileUtils
+import com.desolation.spreads.reach.cf.model.DuplicateFile
+import com.desolation.spreads.reach.cf.utils.FileUtils
 
 class DuplicateItemAdapter(
     private val onItemClickListener: (DuplicateFile) -> Unit

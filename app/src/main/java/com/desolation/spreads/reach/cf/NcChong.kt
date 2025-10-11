@@ -1,4 +1,4 @@
-package com.desolation.spreads.reach
+package com.desolation.spreads.reach.cf
 
 import android.Manifest
 import android.content.Intent
@@ -19,11 +19,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.desolation.spreads.reach.adapter.DuplicateCategoryAdapter
+import com.desolation.spreads.reach.NcEnd
+import com.desolation.spreads.reach.R
+import com.desolation.spreads.reach.cf.adapter.DuplicateCategoryAdapter
+import com.desolation.spreads.reach.cf.model.DuplicateCategory
+import com.desolation.spreads.reach.cf.model.DuplicateFile
+import com.desolation.spreads.reach.cf.utils.FileUtils
 import com.desolation.spreads.reach.databinding.NcChongBinding
-import com.desolation.spreads.reach.model.DuplicateCategory
-import com.desolation.spreads.reach.model.DuplicateFile
-import com.desolation.spreads.reach.utils.FileUtils
 import java.io.File
 
 class NcChong : AppCompatActivity() {
@@ -31,11 +33,11 @@ class NcChong : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private var categories: List<DuplicateCategory> = emptyList()
     private var adapter: DuplicateCategoryAdapter? = null
-    
+
     companion object {
         private const val STORAGE_PERMISSION_REQUEST_CODE = 1001
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,9 +47,9 @@ class NcChong : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        
+
         setupViews()
-        
+
         if (checkStoragePermission()) {
             showLoadingScreen()
             startFileScan()
@@ -55,7 +57,7 @@ class NcChong : AppCompatActivity() {
             requestStoragePermission()
         }
     }
-    
+
     private fun checkStoragePermission(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
@@ -63,17 +65,17 @@ class NcChong : AppCompatActivity() {
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         }
     }
-    
+
     private fun requestStoragePermission() {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO)
         } else {
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-        
+
         ActivityCompat.requestPermissions(this, permissions, STORAGE_PERMISSION_REQUEST_CODE)
     }
-    
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -90,7 +92,7 @@ class NcChong : AppCompatActivity() {
             }
         }
     }
-    
+
     private fun setupViews() {
         // Setup RecyclerView
         binding.rvDuplicateFiles.layoutManager = LinearLayoutManager(this)
@@ -103,24 +105,24 @@ class NcChong : AppCompatActivity() {
             }
         )
         binding.rvDuplicateFiles.adapter = adapter
-        
+
         // Setup back button
         binding.textBack.setOnClickListener {
             finish()
         }
-        
+
         // Setup delete button
         binding.btnDelete.setOnClickListener {
             showDeleteConfirmationDialog()
         }
     }
-    
+
     private fun showLoadingScreen() {
         binding.inLoad.tvTip.text = "Scanning..."
         binding.inLoad.root.setOnClickListener {  }
         binding.inLoad.imgBack.setOnClickListener { finish() }
         binding.inLoad.missPm.visibility = View.VISIBLE
-        
+
         // Set rotation animation
         val rotateAnimation = RotateAnimation(
             0f, 360f,
@@ -131,15 +133,15 @@ class NcChong : AppCompatActivity() {
             repeatCount = Animation.INFINITE
             fillAfter = true
         }
-        
+
         binding.inLoad.imgLoad.startAnimation(rotateAnimation)
     }
-    
+
     private fun hideLoadingScreen() {
         binding.inLoad.imgLoad.clearAnimation()
         binding.inLoad.missPm.visibility = View.GONE
     }
-    
+
     private fun startFileScan() {
         // Show loading for 1 second, then start scanning
         handler.postDelayed({
@@ -160,21 +162,21 @@ class NcChong : AppCompatActivity() {
             }.start()
         }, 1000)
     }
-    
+
     private fun updateDeleteButtonState() {
         val hasSelected = categories.any { category ->
             category.files.any { it.isSelected }
         }
         binding.btnDelete.isEnabled = hasSelected
     }
-    
+
     private fun showDeleteConfirmationDialog() {
         val selectedFiles = getSelectedFiles()
         if (selectedFiles.isEmpty()) {
             Toast.makeText(this, "Please select files to delete", Toast.LENGTH_SHORT).show()
             return
         }
-        
+
         AlertDialog.Builder(this)
             .setTitle("Delete Files")
             .setMessage("Are you sure you want to delete ${selectedFiles.size} selected files?")
@@ -184,13 +186,13 @@ class NcChong : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
-    
+
     private fun getSelectedFiles(): List<DuplicateFile> {
         return categories.flatMap { category ->
             category.files.filter { it.isSelected }
         }
     }
-    
+
     private fun performDelete(selectedFiles: List<DuplicateFile>) {
         Thread {
             var deletedSize = 0L
@@ -204,7 +206,7 @@ class NcChong : AppCompatActivity() {
                     // Skip files that can't be deleted
                 }
             }
-            
+
             handler.post {
                 // Navigate to NcEnd with clean_size parameter
                 val intent = Intent(this, NcEnd::class.java).apply {

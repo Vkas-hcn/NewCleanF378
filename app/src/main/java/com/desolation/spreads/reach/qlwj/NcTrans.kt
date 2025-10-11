@@ -1,34 +1,24 @@
-package com.desolation.spreads.reach
+package com.desolation.spreads.reach.qlwj
 
 // NcTrans.kt
 
-import android.Manifest
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.desolation.spreads.reach.databinding.NcMasBinding
+import com.desolation.spreads.reach.qlwj.CategoryAdapter
+import com.desolation.spreads.reach.NcEnd
+import com.desolation.spreads.reach.R
 import com.desolation.spreads.reach.databinding.NcTrashBinding
 import java.io.File
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class NcTrans : AppCompatActivity() {

@@ -1,11 +1,9 @@
-package com.desolation.spreads.reach.utils
+package com.desolation.spreads.reach.cf.utils
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.media.ExifInterface
-import com.desolation.spreads.reach.model.DuplicateCategory
-import com.desolation.spreads.reach.model.DuplicateFile
+import com.desolation.spreads.reach.cf.model.DuplicateCategory
+import com.desolation.spreads.reach.cf.model.DuplicateFile
 import java.io.File
 import java.io.FileInputStream
 import java.security.MessageDigest

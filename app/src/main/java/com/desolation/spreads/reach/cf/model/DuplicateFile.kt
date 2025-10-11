@@ -1,6 +1,4 @@
-package com.desolation.spreads.reach.model
-
-import java.io.File
+package com.desolation.spreads.reach.cf.model
 
 data class DuplicateFile(
     val name: String,
