@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.desolation.spreads.reach.databinding.NcNameBinding
+import com.desolation.spreads.reach.yy.NcAppMc
 import java.text.DecimalFormat
 import kotlin.math.max
 
@@ -62,7 +63,7 @@ class NcMaster : AppCompatActivity() {
 
         binding.tvApp.setOnClickListener {
             jumpType = 1
-            checkPermissionsAndScan()
+            startScanActivity()
         }
 
         binding.tvLarge.setOnClickListener {

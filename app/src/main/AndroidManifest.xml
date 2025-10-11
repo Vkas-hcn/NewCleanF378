@@ -6,6 +6,13 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +47,7 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>
-        <activity android:name=".NcAppMc"
+        <activity android:name=".yy.NcAppMc"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>

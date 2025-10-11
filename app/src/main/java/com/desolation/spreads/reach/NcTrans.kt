@@ -369,8 +369,8 @@ class NcTrans : AppCompatActivity() {
 
             handler.post {
                 val intent = Intent(this, NcEnd::class.java).apply {
-                    putExtra("deleted_count", deletedCount)
-                    putExtra("deleted_size", deletedSize)
+                    putExtra("clean_size", deletedSize.toString())
+                    putExtra("page_type", "clean")
                 }
                 startActivity(intent)
                 finish()
