@@ -118,6 +118,8 @@ class NcChong : AppCompatActivity() {
     }
 
     private fun showLoadingScreen() {
+
+        binding.inLoad.imgLogo.setImageResource(R.drawable.dup_icon)
         binding.inLoad.tvTip.text = "Scanning..."
         binding.inLoad.root.setOnClickListener {  }
         binding.inLoad.imgBack.setOnClickListener { finish() }
@@ -164,10 +166,44 @@ class NcChong : AppCompatActivity() {
     }
 
     private fun updateDeleteButtonState() {
-        val hasSelected = categories.any { category ->
-            category.files.any { it.isSelected }
-        }
+        val selectedFiles = getSelectedFiles()
+        val hasSelected = selectedFiles.isNotEmpty()
         binding.btnDelete.isEnabled = hasSelected
+        
+        // 更新删除按钮文本，显示选中文件的总大小
+        if (hasSelected) {
+            val totalSize = selectedFiles.sumOf { it.size }
+            val formattedSize = formatFileSize(totalSize)
+            binding.btnDelete.text = "Delete ($formattedSize)"
+        } else {
+            binding.btnDelete.text = "Delete"
+        }
+    }
+    
+    /**
+     * 将字节大小格式化为易读的格式（如KB, MB, GB）
+     */
+    private fun formatFileSize(bytes: Long): String {
+        if (bytes < 0) return "0 B"
+        
+        val units = arrayOf("B", "KB", "MB", "GB", "TB")
+        var size = bytes.toDouble()
+        var unitIndex = 0
+        
+        // 将字节转换为合适的单位
+        while (size >= 1024 && unitIndex < units.size - 1) {
+            size /= 1024
+            unitIndex++
+        }
+        
+        // 格式化结果，根据大小决定保留小数位数
+        return if (unitIndex >= 1) {
+            // 对于大于或等于KB的单位，保留一位小数
+            String.format("%.1f%s", size, units[unitIndex])
+        } else {
+            // 对于字节单位，不保留小数
+            String.format("%.0f%s", size, units[unitIndex])
+        }
     }
 
     private fun showDeleteConfirmationDialog() {

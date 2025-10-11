@@ -78,6 +78,7 @@ class NcWen : AppCompatActivity() {
     }
 
     private fun showLoadingThenScan() {
+        binding.inLoad.imgLogo.setImageResource(R.drawable.icon_large_files)
         binding.inLoad.tvTip.text = "Scanning..."
         binding.inLoad.root.setOnClickListener {  }
         binding.inLoad.imgBack.setOnClickListener { finish() }
@@ -277,6 +278,7 @@ class NcWen : AppCompatActivity() {
                 // go to NcEnd and pass clean_size as bytes string
                 val intent = Intent(this, NcEnd::class.java).apply {
                     putExtra("clean_size", deletedSize.toString())
+                    putExtra("page_type", "large")
                 }
                 startActivity(intent)
                 finish()
