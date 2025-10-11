@@ -43,11 +43,11 @@ class NcWen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.file)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.file)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         setupViews()
         showLoadingThenScan()
@@ -78,7 +78,9 @@ class NcWen : AppCompatActivity() {
     }
 
     private fun showLoadingThenScan() {
-        // show loading include
+        binding.inLoad.tvTip.text = "Scanning..."
+        binding.inLoad.root.setOnClickListener {  }
+        binding.inLoad.imgBack.setOnClickListener { finish() }
         binding.inLoad.root.isVisible = true
 
         val rotate = RotateAnimation(0f, 360f,
