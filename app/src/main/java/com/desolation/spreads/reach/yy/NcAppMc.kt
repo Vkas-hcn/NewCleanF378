@@ -5,17 +5,25 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.desolation.spreads.reach.R
 import com.desolation.spreads.reach.databinding.NcAppBinding
 import com.desolation.spreads.reach.yy.adapter.AppAdapter
 import com.desolation.spreads.reach.yy.model.AppInfo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class NcAppMc : AppCompatActivity() {
     private val binding by lazy { NcAppBinding.inflate(layoutInflater) }
@@ -31,11 +39,34 @@ class NcAppMc : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         setupUI()
         loadAppList()
+        showLoadingThenScan()
     }
+    private fun showLoadingThenScan() {
+        lifecycleScope.launch {
+            binding.inLoad.imgLogo.setImageResource(R.drawable.icon_large_files)
+            binding.inLoad.tvTip.text = "Scanning..."
+            binding.inLoad.root.setOnClickListener {  }
+            binding.inLoad.imgBack.setOnClickListener { finish() }
+            binding.inLoad.root.isVisible = true
+            Log.e("TAG", "showLoadingThenScan-1: ${binding.inLoad.root.isVisible}", )
+            val rotate = RotateAnimation(0f, 360f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f).apply {
+                duration = 800
+                repeatCount = RotateAnimation.INFINITE
+                interpolator = LinearInterpolator()
+            }
+            binding.inLoad.imgLoad.startAnimation(rotate)
+            delay(1500L)
+            binding.inLoad.imgLoad.clearAnimation()
+            binding.inLoad.root.isVisible = false
+            Log.e("TAG", "showLoadingThenScan-2: ${binding.inLoad.root.isVisible}", )
+        }
 
+
+    }
     private fun setupUI() {
         // 设置返回按钮
         binding.appCompatTextView.setOnClickListener {

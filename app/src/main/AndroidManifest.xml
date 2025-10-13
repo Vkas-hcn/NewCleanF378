@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewCleanF378">
+        android:theme="@style/Theme.NewClean">
         <activity
             android:name=".NcName"
             android:screenOrientation="portrait"
