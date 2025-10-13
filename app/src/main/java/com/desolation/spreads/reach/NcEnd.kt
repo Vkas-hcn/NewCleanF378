@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.desolation.spreads.reach.cf.NcChong
+import com.desolation.spreads.reach.qlwj.presentation.NcTrans
 import com.desolation.spreads.reach.databinding.NcEndBinding
-import com.desolation.spreads.reach.qlwj.NcTrans
 import com.desolation.spreads.reach.yy.NcAppMc
 
 class NcEnd : AppCompatActivity() {

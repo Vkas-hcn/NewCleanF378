@@ -22,8 +22,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.desolation.spreads.reach.cf.NcChong
+import com.desolation.spreads.reach.qlwj.presentation.NcTrans
 import com.desolation.spreads.reach.databinding.NcMasBinding
-import com.desolation.spreads.reach.qlwj.NcTrans
 import com.desolation.spreads.reach.yy.NcAppMc
 import java.text.DecimalFormat
 import kotlin.math.max

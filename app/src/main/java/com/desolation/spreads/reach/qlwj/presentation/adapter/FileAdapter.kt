@@ -1,15 +1,18 @@
-package com.desolation.spreads.reach.qlwj
+package com.desolation.spreads.reach.qlwj.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.desolation.spreads.reach.R
+import com.desolation.spreads.reach.qlwj.data.model.TrashFile
+import com.desolation.spreads.reach.qlwj.util.FileSizeFormatter
 import com.desolation.spreads.reach.databinding.ItemFileBinding
 
-class FileScanAdapter(
+
+class FileAdapter(
     private val files: List<TrashFile>,
-    private val onSelectionChanged: () -> Unit
-) : RecyclerView.Adapter<FileScanAdapter.FileViewHolder>() {
+    private val onFileSelectionChanged: (Int) -> Unit
+) : RecyclerView.Adapter<FileAdapter.FileViewHolder>() {
 
     class FileViewHolder(val binding: ItemFileBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -25,35 +28,26 @@ class FileScanAdapter(
         val file = files[position]
 
         with(holder.binding) {
+            // 设置文件信息
             tvFileName.text = file.name
-            tvFileSize.text = formatFileSize(file.size)
+            tvFileSize.text = FileSizeFormatter.formatFileSize(file.size)
 
+            // 设置选中状态图标
             imgFileSelect.setImageResource(
                 if (file.isSelected) R.drawable.icon_check else R.drawable.icon_discheck
             )
 
+            // 设置文件点击事件
             root.setOnClickListener {
-                toggleFileSelection(file, position)
+                onFileSelectionChanged(position)
             }
 
+            // 设置选择框点击事件
             imgFileSelect.setOnClickListener {
-                toggleFileSelection(file, position)
+                onFileSelectionChanged(position)
             }
         }
     }
 
     override fun getItemCount() = files.size
-
-    private fun toggleFileSelection(file: TrashFile, position: Int) {
-        file.isSelected = !file.isSelected
-        notifyItemChanged(position)
-        onSelectionChanged()
-    }
-
-    private fun formatFileSize(size: Long): String {
-        return when {
-            size >= 1024 * 1024 -> String.format("%.2fMB", size / (1024.0 * 1024.0))
-            else -> String.format("%.2fKB", size / 1024.0)
-        }
-    }
 }
