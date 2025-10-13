@@ -34,9 +34,7 @@ class NcChong : AppCompatActivity() {
     private var categories: List<DuplicateCategory> = emptyList()
     private var adapter: DuplicateCategoryAdapter? = null
 
-    companion object {
-        private const val STORAGE_PERMISSION_REQUEST_CODE = 1001
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,48 +48,11 @@ class NcChong : AppCompatActivity() {
 
         setupViews()
 
-        if (checkStoragePermission()) {
-            showLoadingScreen()
-            startFileScan()
-        } else {
-            requestStoragePermission()
-        }
+        showLoadingScreen()
+        startFileScan()
+
     }
 
-    private fun checkStoragePermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED
-        } else {
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        }
-    }
-
-    private fun requestStoragePermission() {
-        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO)
-        } else {
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-
-        ActivityCompat.requestPermissions(this, permissions, STORAGE_PERMISSION_REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == STORAGE_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                showLoadingScreen()
-                startFileScan()
-            } else {
-                Toast.makeText(this, "Storage permission is required to scan for duplicate files", Toast.LENGTH_LONG).show()
-                finish()
-            }
-        }
-    }
 
     private fun setupViews() {
         // Setup RecyclerView
@@ -121,7 +82,7 @@ class NcChong : AppCompatActivity() {
 
         binding.inLoad.imgLogo.setImageResource(R.drawable.dup_icon)
         binding.inLoad.tvTip.text = "Scanning..."
-        binding.inLoad.root.setOnClickListener {  }
+        binding.inLoad.root.setOnClickListener { }
         binding.inLoad.imgBack.setOnClickListener { finish() }
         binding.inLoad.missPm.visibility = View.VISIBLE
 
@@ -169,7 +130,7 @@ class NcChong : AppCompatActivity() {
         val selectedFiles = getSelectedFiles()
         val hasSelected = selectedFiles.isNotEmpty()
         binding.btnDelete.isEnabled = hasSelected
-        
+
         // 更新删除按钮文本，显示选中文件的总大小
         if (hasSelected) {
             val totalSize = selectedFiles.sumOf { it.size }
@@ -179,23 +140,23 @@ class NcChong : AppCompatActivity() {
             binding.btnDelete.text = "Delete"
         }
     }
-    
+
     /**
      * 将字节大小格式化为易读的格式（如KB, MB, GB）
      */
     private fun formatFileSize(bytes: Long): String {
         if (bytes < 0) return "0 B"
-        
+
         val units = arrayOf("B", "KB", "MB", "GB", "TB")
         var size = bytes.toDouble()
         var unitIndex = 0
-        
+
         // 将字节转换为合适的单位
         while (size >= 1024 && unitIndex < units.size - 1) {
             size /= 1024
             unitIndex++
         }
-        
+
         // 格式化结果，根据大小决定保留小数位数
         return if (unitIndex >= 1) {
             // 对于大于或等于KB的单位，保留一位小数
