@@ -1,7 +1,34 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 }
+
+android {
+    namespace 'com.demo.common2'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 26
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
 apply plugin: 'stringfog'
 // 导入RandomKeyGenerator类，如果使用HardCodeKeyGenerator，更换下类名
 import com.github.megatronking.stringfog.plugin.StringFogMode
@@ -13,58 +40,17 @@ stringfog {
     enable true
     // 可选：指定需加密的代码包路径，可配置多个，未指定将默认全部加密。
     // todo modify
-    fogPackages = ['com.desolation.spreads.reach']
+    fogPackages = ['com.demo.common2']
     // 可选（4.0版本新增）：用于控制字符串加密后在字节码中的存在形式, 默认为base64，
     // 也可以使用text或者bytes
     mode StringFogMode.base64
 }
-android {
-    namespace 'com.desolation.spreads.reach'
-    compileSdk 35
-
-    defaultConfig {
-        applicationId "com.desolation.spreads.reach"
-        minSdk 26
-        targetSdk 35
-        versionCode 1
-        versionName "1.0.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = '11'
-    }
-    buildFeatures {
-        viewBinding true
-    }
-}
 
 dependencies {
-    implementation(project(':Common',))
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
-    implementation libs.androidx.activity
-    implementation libs.androidx.constraintlayout
-    implementation libs.androidx.lifecycle.viewmodel
-    implementation libs.androidx.lifecycle.livedata
-    implementation libs.kotlinx.coroutines.core
-    implementation libs.kotlinx.coroutines.android
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -99,6 +85,29 @@ dependencies {
     api 'com.pangle.global:bigo-adapter:5.5.1.1'
     api ('com.pangle.global:vungle-adapter:7.5.1.2')
 
+
+    // todo 下面为TradPlus 聚合需要的sdk，开发前需要找刘安辉确定要接入哪些平台
+    // TradPlus
+    api 'com.tradplusad:tradplus:14.7.10.1'
+    //noinspection GradleCompatible
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0-alpha02'
+    // Mintegral
+    implementation 'com.tradplusad:tradplus-mintegralx_overseas:18.14.7.10.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.mbridge.msdk.oversea:mbridge_android_sdk:16.9.91'
+    // Liftoff
+    implementation 'com.tradplusad:tradplus-vunglex:7.14.7.10.1'
+    implementation 'com.vungle:vungle-ads:7.5.1'
+    // Bigo
+    implementation 'com.bigossp:bigo-ads:5.5.1'
+    implementation 'com.tradplusad:tradplus-bigo:57.14.7.10.1'
+    // Cross Promotion
+    implementation 'com.tradplusad:tradplus-crosspromotion:27.14.7.10.1'
+    // TP Exchange
+    // 请注意保持与主包版本同步更新
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.tradplusad:tp_exchange:40.14.7.10.1'
 
     // todo 下面为topon 聚合需要的sdk，开发前需要找刘安辉确定要接入哪些平台
     // 如果不要topon 则不要这个依赖

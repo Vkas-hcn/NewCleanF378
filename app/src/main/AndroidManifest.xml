@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
+        tools:replace="android:dataExtractionRules,fullBackupContent"
         android:theme="@style/Theme.NewClean">
         <activity
             android:name=".NcName"

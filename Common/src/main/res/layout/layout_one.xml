@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="1px">
+<!--   TODO modify 这个页面最好也做一下差异化，简单做一下就好了，
+需要注意的是 1px 不能写入values的资源文件中，且这个是前台服务需要用到的
+所以不能出现 androidx.appcompat.widget 下的组件
+  -->
+</LinearLayout>
