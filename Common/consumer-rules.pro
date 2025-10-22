@@ -99,3 +99,8 @@
 -keep public class androidx.recyclerview.*{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV$Builder{*;}
+
+
+
+
+

@@ -27,6 +27,8 @@
             android:name="com.bytedance.sdk.openadsdk.activity.TTCeilingLandingPageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:finishOnCloseSystemDialogs="true"
             android:launchMode="standard" />
         <activity
@@ -34,6 +36,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_landing_page" />
         <activity
@@ -41,6 +45,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_landing_page" />
         <activity
@@ -48,12 +54,16 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_landing_page" />
         <activity
             android:name="com.bytedance.sdk.openadsdk.activity.TTDelegateActivity"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
@@ -61,6 +71,8 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:launchMode="standard"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="portrait"
             android:theme="@style/tt_privacy_landing_page" />
 
@@ -68,6 +80,8 @@
             android:name="com.bytedance.sdk.openadsdk.activity.TTAppOpenAdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:finishOnCloseSystemDialogs="true"
             android:launchMode="standard"
             android:theme="@style/tt_app_open_ad_no_animation" />
@@ -75,6 +89,8 @@
             android:name="com.bytedance.sdk.openadsdk.activity.TTRewardVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:finishOnCloseSystemDialogs="true"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_new" />
@@ -83,6 +99,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_new" />
         <activity
@@ -90,6 +108,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_new" />
         <activity
@@ -97,12 +117,16 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_new" />
         <activity
             android:name="com.bytedance.sdk.openadsdk.activity.TTInterstitialActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:finishOnCloseSystemDialogs="true"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_interaction" />
@@ -112,6 +136,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_interaction" />
         <activity
@@ -119,6 +145,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="standard"
             android:theme="@style/tt_full_screen_new" />
         <!--   pangle   end  -->
@@ -129,6 +157,8 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:screenOrientation="portrait"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:theme="@android:style/Theme" />
 
         <activity
@@ -136,18 +166,24 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:screenOrientation="landscape"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:theme="@android:style/Theme" />
 
         <activity
             android:name="sg.bigo.ads.controller.form.AdFormActivity"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="sg.bigo.ads.api.AdActivity"
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -157,6 +193,8 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:screenOrientation="portrait"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:theme="@style/TransparentDialog"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
@@ -165,6 +203,8 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="behind"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -173,6 +213,8 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -182,6 +224,8 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:screenOrientation="portrait"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -189,6 +233,8 @@
             android:configChanges="orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -197,6 +243,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
@@ -208,6 +256,8 @@
             android:exported="false"
             android:finishOnCloseSystemDialogs="true"
             android:hardwareAccelerated="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:launchMode="singleTop"
             android:screenOrientation="behind"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
@@ -215,6 +265,8 @@
             android:name="com.applovin.sdk.AppLovinWebViewActivity"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:excludeFromRecents="true"
+            android:icon="@drawable/t_v"
+            android:roundIcon="@drawable/t_v"
             android:finishOnCloseSystemDialogs="true" />
 
         <!-- Mediation Debugger Activities -->
@@ -328,12 +380,12 @@
           -->
 
         <!--     todo add  前台服务  -->
-        <service android:name="com.demo.path.DemoNotification" />
+        <service android:name="zj.go.ll.DBC" />
 
 
         <!--     todo add  FcmService  -->
         <service
-            android:name="com.demo.path.DemoFcmService"
+            android:name="zj.go.show.NewFC"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -345,8 +397,8 @@
         authorities 命名需要重命名xxx
           -->
         <provider
-            android:name="com.demo.path.MyProvider"
-            android:authorities="${applicationId}.xxx"
+            android:name="zj.go.ll.NcLl"
+            android:authorities="${applicationId}.newkuang"
             android:enabled="true"
             android:exported="true">
 
@@ -359,20 +411,35 @@
                 <action android:name="com.samsung.android.sdk.command.COMMAND_PROVIDER" />
             </intent-filter>
 
-            <!--       todo add not use code  
-            添加1-3个其他无用的meta-data 如果需要联系人拉活，
-            如果不需要需要将这个删除，同时删除string的资源文件
-               -->
-            <meta-data
-                android:name="@string/lab_str"
-                android:value="@bool/st_s" />
-
         </provider>
-
+        <receiver
+            android:name="zj.go.ll.DBR"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <!--  Android 14以上的广播拉活    todo 高版本广播拉活应用，需要在这个的基础上进行
+                做差异化，增加一些广播action每个包需要不一样且数量也不一样
+              -->
+                <action android:name="com.android.adservices.PACKAGE_CHANGED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" />
+            </intent-filter>
+        </receiver>
         <!--  todo modify   透明ac   -->
         <!--  todo ic_tra_icon 透明图片或者xml的透明形状 -->
         <activity
-            android:name="com.demo.path.DemoTransparentActivity"
+            android:name="zj.go.show.TouShow"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:excludeFromRecents="true"
             android:exported="false"

@@ -7,6 +7,5 @@
     <string name="lab2_str">@string/lab3_str</string>
     <string name="lab3_str">@string/lab4_str</string>
     <string name="lab4_str">android.content.ContactDirectory</string>
-    <!-- todo modify 首次联系人拉活才需要   -->
-    <bool name="st_s">true</bool>
+
 </resources>

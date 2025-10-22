@@ -1,6 +1,7 @@
 package ad
 
 import android.app.Activity
+import android.util.Log
 import com.ak.impI.Core
 import com.appsflyer.AFAdRevenueData
 import com.appsflyer.AdRevenueScheme
@@ -36,6 +37,8 @@ class ToponAdImpl(val tag: String) : TUInterstitialListener {
 
     // 加载广告
     fun lAd(id: String) {
+        Log.e("TAG", "ToponAdImpl-id: $id", )
+
         if (id.isBlank()) return
         if (isLoading && System.currentTimeMillis() - lT < 61000) return
         if (isReadyAd()) return
@@ -74,11 +77,14 @@ class ToponAdImpl(val tag: String) : TUInterstitialListener {
     override fun onInterstitialAdLoaded() {
         isLoading = false
         Core.pE("advertise_get$tag")
+        Log.e("TAG", "onInterstitialAdLoaded:")
+
     }
 
     override fun onInterstitialAdLoadFail(p0: AdError?) {
         isLoading = false
         Core.pE("advertise_fail$tag", "${p0?.code}")
+        Log.e("TAG", "Topon广告加载失败:${p0?.code}_${p0?.desc}")
     }
 
     override fun onInterstitialAdClicked(p0: TUAdInfo?) {}
@@ -109,13 +115,13 @@ class ToponAdImpl(val tag: String) : TUInterstitialListener {
 
     private fun postP(ad: TUAdInfo) {
         Core.postAd(JSONObject().apply {
-            put("", ad.publisherRevenue * 1000000)//ad_pre_ecpm
-            put("", ad.currency)//currency
-            put("", ad.networkName)//ad_network
-            put("", "topon")//ad_source_client
-            put("", ad.placementId)//ad_code_id
-            put("", ad.adsourceId)//ad_pos_id
-            put("", ad.format)//ad_format
+            put("sc", ad.publisherRevenue * 1000000)//ad_pre_ecpm
+            put("martinez", ad.currency)//currency
+            put("ban", ad.networkName)//ad_network
+            put("cal", "topon")//ad_source_client
+            put("college", ad.placementId)//ad_code_id
+            put("studio", ad.adsourceId)//ad_pos_id
+            put("bug", ad.format)//ad_format
         }.toString())
 
         val cpm = ad.publisherRevenue

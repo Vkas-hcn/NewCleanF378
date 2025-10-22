@@ -13,8 +13,9 @@
         </intent>
     </queries>
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name=".GoShow"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,14 +27,35 @@
         tools:replace="android:dataExtractionRules,fullBackupContent"
         android:theme="@style/Theme.NewClean">
         <activity
-            android:name=".NcName"
+            android:name=".NcNameFall"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data
+                    android:host="com.desolation.spreads.reach"
+                    android:scheme="com.desolation.spreads.reach" />
+            </intent-filter>
+        </activity>
+        <activity-alias
+            android:name="com.desolation.spreads.reach.NcName"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".NcNameFall">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity
+            android:name=".NcJump"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.INFO" />
             </intent-filter>
         </activity>
         <activity android:name=".NcMaster"

@@ -1,7 +1,13 @@
 package k.b;
 
+import android.util.Log;
+
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
+
+import zj.go.NcZong;
+import zj.go.datapost.NcPointFun;
+import zj.go.datapost.PostHelp;
 
 /**
  * Date：2025/10/14
@@ -17,30 +23,19 @@ public class b implements com.ak.c {
     // 上报普通埋点事件
     @Override
     public void a(@NonNull String string, @NonNull String value) {
-
+        PostHelp.INSTANCE.postPointShow(string,value);
     }
 
     // 上报广告事件
-    @NonNull
-    @Override
-    public String e(@NonNull String string) {
-        return null;
-    }
-
     @Override
     public void c(@NonNull String string) {
-
-    }
-
-    // 上报install 事件
-    @Override
-    public void d(@NonNull String ref) {
-
+        PostHelp.INSTANCE.postAdShow(string);
     }
 
     // finish 掉所有activity
     @Override
     public long f() {
+        NcZong.dal.finishAllActivities();
         return 0;
     }
 }

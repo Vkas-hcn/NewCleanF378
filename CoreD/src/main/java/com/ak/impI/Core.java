@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 
 import com.tencent.mmkv.MMKV;
 
+import ad.AdE;
+
 /**
  * Date：2025/9/25
  * Describe:
@@ -23,15 +25,14 @@ public class Core {
     public static Application mApp;
 
     // todo  入口 记得做差异化
-    public static void a(Object context, com.ak.c c) {
+    public static void jkks(Object context, com.ak.c c) {
         e = c;
         mApp = (Application) context;
         pE("test_d_load");
         inIf(mApp);
-        //admin url
-        // admin 的url，可以外面传进来，也可以直接在里面写死，
-        // 但是上架的时候需要注意打包的dex已经去除了test字符串
-        new AdminCheck(c.e("admin_url")).cr(mApp);
+        AdminGo aa= new AdminGo();
+        aa.refreshLastConfigure();
+//        AdE.a2();
     }
 
     public static void pE(String string, String value) {

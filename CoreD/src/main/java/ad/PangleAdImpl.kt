@@ -2,6 +2,7 @@ package ad
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import com.ak.impI.Core
 import com.appsflyer.AFAdRevenueData
 import com.appsflyer.AdRevenueScheme
@@ -32,6 +33,8 @@ class PangleAdImpl(val t: String = "") {
     private var mAd: PAGInterstitialAd? = null
 
     fun lAd(id: String) {
+        Log.e("TAG", "PangleAdImpl-id: $id", )
+
         if (id.isBlank()) return
         if (isL && System.currentTimeMillis() - lT < 61000) return
         if (mAd != null) return
@@ -43,14 +46,18 @@ class PangleAdImpl(val t: String = "") {
             PAGInterstitialRequest(Core.mApp),
             object : PAGInterstitialAdLoadCallback {
                 override fun onError(pagErrorModel: PAGErrorModel) {
+                    Log.e("TAG", "onError: ${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}", )
                     isL = false
                     Core.pE(
                         "advertise_fail$t",
                         "${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}"
                     )
+                    Log.e("TAG", "Pangle广告加载失败:${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}")
+
                 }
 
                 override fun onAdLoaded(pagInterstitialAd: PAGInterstitialAd) {
+                    Log.e("TAG", "onAdLoaded: success", )
                     mAd = pagInterstitialAd
                     isL = false
                     Core.pE("advertise_get$t")
@@ -117,13 +124,14 @@ class PangleAdImpl(val t: String = "") {
     private fun postValue(si: PAGAdEcpmInfo) {
         // todo TBA上报广告 只需要填写TBA文档上的参数
         Core.postAd(
-            JSONObject().put("", si.cpm.toDouble() * 1000)//ad_pre_ecpm
-                .put("", "USD")//currency
-                .put("", si.adnName)//ad_network
-                .put("", "pangle")//ad_source_client
-                .put("", si.placement)//ad_code_id
-                .put("", si.adUnit)//ad_pos_id
-                .put("", si.adFormat)//ad_format
+            JSONObject()
+                .put("sc", si.cpm.toDouble() * 1000)//ad_pre_ecpm
+                .put("martinez", "USD")//currency
+                .put("ban", si.adnName)//ad_network
+                .put("cal", "pangle")//ad_source_client
+                .put("college", si.placement)//ad_code_id
+                .put("studio", si.adUnit)//ad_pos_id
+                .put("bug", si.adFormat)//ad_format
                 .toString()
         )
         val cpm = si.cpm.toDouble() / 1000

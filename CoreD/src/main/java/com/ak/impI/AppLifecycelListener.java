@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +21,7 @@ import ad.AdE;
 public class AppLifecycelListener implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+        Log.e("TAG", "onActivityCreated: "+activity.getClass().getSimpleName());
         String name = activity.getClass().getSimpleName();
         if (name.equals(Constant.AC_NAME)) {
             AdE.getMAdC().showAd(activity);
