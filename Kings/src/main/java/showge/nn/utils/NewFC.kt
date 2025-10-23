@@ -1,4 +1,4 @@
-package g
+package showge.nn.utils
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

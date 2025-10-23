@@ -1,5 +1,6 @@
 package com.desolation.spreads.reach
 
+import a.A
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
@@ -12,7 +13,7 @@ class GoShow: Application() {
         if (!isMainProcess(this)) {
             return
         }
-        NcZong.initSp(this)
+        A.b(this)
     }
     private fun isMainProcess(context: Context): Boolean {
         return context.packageName == getCurrentProcessName(context)

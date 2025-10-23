@@ -12,10 +12,8 @@ import gh.sj.NcGoA
 import kotlin.random.Random
 
 object NcPointFun {
-    // 记录postInsFun是否已成功上传（一次性事件）
     private var isInsEventSuccess by MvS.bool()
     
-    // 记录各个埋点是否正在请求中
     private val requestingSet = mutableSetOf<String>()
     
     fun postInsFun() {
@@ -78,7 +76,8 @@ object NcPointFun {
         key2: String? = null,
         keyValue2: Any? = null
     ) {
-        if (!canRetry && NcZong.akv.isNotBlank() && NcZong.getTypeState(NcZong.akv) !="one") {
+
+        if (!canRetry && NcZong.akv.isNotBlank() && NcZong.getKeyTypeValue(NcZong.akv,"must_name_event") !="can") {
             return
         }
         
@@ -103,14 +102,7 @@ object NcPointFun {
         )
     }
     
-    /**
-     * 重试请求
-     * @param requestKey 请求唯一标识
-     * @param data 请求数据
-     * @param maxRetries 最大重试次数
-     * @param eventName 事件名称（用于日志）
-     * @param onComplete 完成回调（可选）
-     */
+
     private fun retryRequest(
         requestKey: String,
         data: String,

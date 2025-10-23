@@ -78,6 +78,7 @@ class PAI(val t: String = "") {
                             "USD",  // currencyIso4217Code
                             it.cpm.toDouble() / 1000 // revenue
                         )
+
                         val additionalParameters: MutableMap<String, Any> = HashMap()
                         additionalParameters[AdRevenueScheme.COUNTRY] = it.country
                         additionalParameters[AdRevenueScheme.AD_UNIT] = it.adUnit

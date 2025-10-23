@@ -1,17 +1,16 @@
-package zj.go.ll
+package gh.i
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import gh.sj.ServiceHelper
 import gh.cark.NcZong
-
+import gh.sj.ServiceHelper
 
 class DAL : Application.ActivityLifecycleCallbacks {
-    
+
     // 前台Activity数量
     private var num = 0
-    
+
     // 保存所有存活的Activity
     private val activityStack = mutableListOf<Activity>()
 
@@ -50,7 +49,7 @@ class DAL : Application.ActivityLifecycleCallbacks {
         // 从栈中移除Activity
         activityStack.remove(activity)
     }
-    
+
 
     private fun onAppEnteredBackground() {
         NcZong.showLog("DAL: 应用退到后台")
@@ -63,19 +62,19 @@ class DAL : Application.ActivityLifecycleCallbacks {
             NcZong.showLog("DAL: 非A方案用户（userType=$userType），不关闭Activity")
         }
     }
-    
+
 
      fun finishAllActivities() {
         try {
             val activitiesToFinish = activityStack.toList()
-            
+
 
             activitiesToFinish.forEach { activity ->
                 if (!activity.isFinishing) {
                     activity.finish()
                 }
             }
-            
+
             NcZong.showLog("DAL: 所有Activity已关闭")
         } catch (e: Exception) {
             NcZong.showLog("DAL: 关闭Activity时发生错误 - ${e.message}")

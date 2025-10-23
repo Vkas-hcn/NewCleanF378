@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.demo.common2'
+    namespace 'zj.go'
     compileSdk 34
 
     defaultConfig {
@@ -15,6 +15,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -40,7 +44,7 @@ stringfog {
     enable true
     // 可选：指定需加密的代码包路径，可配置多个，未指定将默认全部加密。
     // todo modify
-    fogPackages = ['com.demo.common2']
+    fogPackages = ['zj.go',"gh","a","b","d","e","f","g","h","i","j"]
     // 可选（4.0版本新增）：用于控制字符串加密后在字节码中的存在形式, 默认为base64，
     // 也可以使用text或者bytes
     mode StringFogMode.base64
@@ -56,7 +60,7 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 
     // appsflyer start
-    api 'com.appsflyer:af-android-sdk:6.17.0'
+    implementation 'com.appsflyer:af-android-sdk:6.15.2'
     api 'com.android.installreferrer:installreferrer:2.2'
     api 'com.google.android.gms:play-services-base:18.0.1'
     api 'com.google.android.gms:play-services-ads-identifier:18.0.1'

@@ -7,11 +7,17 @@
   "f_value": "3616318175247400",
   "f_t_vlaue": "3616318175247400",
   "t_state": "30-30-60-8-16-80-500-800-40-10",
-  "must_name_event": "",
+  "must_name_event": "can",
   "ad_id_h": "981772962",
   "ad_id_l": "981772963",
   "so_key": "dfgdh3gtg56rfrg6",
-  "wai_str": "tohe"
+  "kuang_key": "m6khiy86thg6rf4d",
+  "tw_v": "mkhhj",
+  "g_k_v": "kkohy",
+  "f_f_v": "tofu",
+  "y_c_v": "tohe",
+  "w_t_v": "kuang",
+  "a_p_n": "1000"
 }
 //B
 {
@@ -43,15 +49,26 @@
   //广告最大显示时间单位秒
   //定时随机配置不能小于定时配置单位秒
   "t_state": "30-30-60-8-16-80-500-800-40-10",
-  //动态增加日志必传埋点建议只在A配置中加,用-分隔
-  "must_name_event": "",
+  //动态增加日志必传埋点建议只在A配置中加,can上报，其他不上报
+  "must_name_event": "can",
   // 广告id 高价值
   "ad_id_h": "981772962",
   // 广告id 低价值
   "ad_id_l": "981772963",
   // 解密so的key
   "so_key": "dfgdh3gtg56rfrg6",
-  // 隐藏icon
-  "wai_str": "tohe"
+  "kuang_key": "m6khiy86thg6rf4d",
+  //外弹文件开关名
+  "tw_v": "mkhhj",
+  //广播接收key
+  "g_k_v": "kkohy",
+  //恢复
+  "f_f_v": "tofu",
+  //隐藏
+  "y_c_v": "tohe",
+  //外弹
+  "w_t_v": "kuang",
+  //Admin请求上线
+  "a_p_n": "1000"
 }
 

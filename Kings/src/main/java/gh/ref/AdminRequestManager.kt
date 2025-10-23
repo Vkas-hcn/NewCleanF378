@@ -1,21 +1,20 @@
 package gh.ref
 
+import android.util.Log
 import kotlinx.coroutines.*
 import gh.cark.NcZong
 import gh.sj.MvS
 import gh.sj.NetCong
+import kotlinx.serialization.json.JsonObject
+import org.json.JSONObject
 import java.util.Calendar
 import kotlin.random.Random
 
-/**
- * Admin请求管理器
- * 负责处理所有Admin请求的时机、重试逻辑和配置处理
- */
+
 class AdminRequestManager(private val ioScope: CoroutineScope) {
 
     private var dailyRequestCount: Int by MvS.int(0, "admin_daily_request_count")
     private var lastRequestDate: String by MvS.string("", "admin_last_request_date")
-    private var dailyRequestLimit: Int by MvS.int(1000, "admin_daily_request_limit")
 
     // 请求状态
     @Volatile
@@ -24,12 +23,14 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
     // 定时任务Job
     private var scheduledJob: Job? = null
 
-    private var xunJob: Job? = null
 
 
     // 重试相关
     private var retryJob: Job? = null
     private var currentRetryCount = 0
+
+
+
 
     /**
      * 启动Admin数据请求流程
@@ -83,7 +84,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
     }
 
 
-
     /**
      * 启动用户定时任务
      * 每x分钟（前后随机5分钟）请求一次，每x秒（前后随机0-10秒）请求一次，失败/超时重试1次
@@ -96,6 +96,7 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 val minutesA = parseAUserInterval(abConfigure)
 
                 val minutesB = parseBUserInterval(abConfigure)
+                Log.e("TAG", "startUserSchedule: minutesA=$minutesA===minutesB${minutesB}----${NcZong.getTypeState(NcZong.akv)}")
                 val isA = NcZong.getTypeState(NcZong.akv) == "one"
                 val user = if (isA) "a" else "b"
                 val userUn = if (isA) "分钟" else "秒"
@@ -130,17 +131,30 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
     private suspend fun requestAdminDataWithBUserRetry() {
         var success = false
         var retries = 0
+        if (isRequesting) {
+            NcZong.showLog("AdminRequestManager: 正在请求中，跳过")
+            return
+        }
+        // 检查每日请求上限
+        if (!checkDailyLimit()) {
+            NcZong.showLog("AdminRequestManager: 已达每日请求上限")
+            return
+        }
 
+        isRequesting = true
+        updateDailyRequestCount()
         while (!success && retries <= 1) {
             val deferred = CompletableDeferred<Boolean>()
 
             NetCong.requestAdmin(object : NetCong.AdminCallback {
                 override fun onSuccess(response: String) {
                     deferred.complete(true)
+                    handleRequestSuccess(response)
                 }
 
                 override fun onFailure(error: String) {
                     deferred.complete(false)
+                    handleRequestFailure(true)
                 }
             })
 
@@ -206,7 +220,7 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
      * 处理请求成功
      */
     private fun handleRequestSuccess(config: String) {
-        NcZong.showLog("AdminRequestManager: 请求成功")
+        NcZong.showLog("AdminRequestManager: 请求成功=${config}")
 
         // 取消重试Job
         retryJob?.cancel()
@@ -215,6 +229,14 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
 
         // 处理配置
         processConfig(config)
+        try {
+            val ss = JSONObject(NcZong.akv)
+            val num = ss.optString("a_p_n")
+            NcZong.dailyRequestLimit = num.toInt()
+            Log.e("TAG", "handleRequestSuccess-apn-1-:${ NcZong.dailyRequestLimit} ")
+        } catch (e: Exception) {
+            Log.e("TAG", "handleRequestSuccess-apn-2-:${e.message} ")
+        }
     }
 
     /**
@@ -342,11 +364,13 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                     oldConfig.isEmpty() -> {
                         NcZong.showLog("AdminRequestManager: 本地无配置获得b配置，触发重试期望获得a配置")
                         // 不保存B配置，触发B流程
+                        NcZong.akv = newConfig
                         startUserSchedule()
                     }
                     // 之前已有b配置，使用新的b配置
                     else -> {
                         NcZong.showLog("AdminRequestManager: 已有b配置，更新b配置并启动b定时")
+                        NcZong.akv = newConfig
                         startUserSchedule()
                     }
                 }
@@ -365,8 +389,8 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             dailyRequestCount = 0
             lastRequestDate = today
         }
-
-        return dailyRequestCount < dailyRequestLimit
+        Log.e("TAG", "请求上限总数: ${NcZong.dailyRequestLimit}", )
+        return dailyRequestCount < NcZong.dailyRequestLimit
     }
 
     /**
@@ -379,9 +403,8 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             dailyRequestCount = 0
             lastRequestDate = today
         }
-
+        NcZong.showLog("AdminRequestManager: 今日请求次数 ${dailyRequestCount}/${NcZong.dailyRequestLimit}")
         dailyRequestCount++
-        NcZong.showLog("AdminRequestManager: 今日请求次数 ${dailyRequestCount}/${dailyRequestLimit}")
     }
 
     /**

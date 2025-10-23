@@ -13,7 +13,7 @@ import com.desolation.spreads.reach.databinding.NcNetBinding
 class NcNet : AppCompatActivity() {
     // 使用伴生对象存储常量
     companion object {
-        private const val GOOGLE_URL = "https://www.google.com"
+        private const val GOOGLE_URL = "https://sites.google.com/view/brilliant-clean/home"
     }
     
     // 使用不同的懒加载初始化方式

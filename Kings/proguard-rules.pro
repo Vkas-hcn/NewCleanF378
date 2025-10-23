@@ -1,17 +1,34 @@
--keep class com.startapp.** {
-      *;
-}
+-keepattributes !SourceFile
+-dontshrink
 
--keep class com.truenet.** {
-      *;
-}
+-keep class a.A{*;}
+-keep class b.C{*;}
+-keep class d.D{*;}
 
--keepattributes Exceptions, InnerClasses, Signature, Deprecated, SourceFile,
-LineNumberTable, *Annotation*, EnclosingMethod
--dontwarn android.webkit.JavascriptInterface
--dontwarn com.startapp.**
 
--dontwarn org.jetbrains.annotations.**
+#appsflyer start
+# keep init adpost
+-keep class com.appsflyer.** { *; }
+-keep class kotlin.jvm.internal.** { *; }
+-keep public class com.android.installreferrer.** { *; }
+#appsflyer end
+
+
+-keep class com.bytedance.sdk.** { *; }
+
+#加固
+-keep class kotlin.**{*;}
+-keep class kotlinx.**{*;}
+-keep class androidx.**{*;}
+-keep class android.**{*;}
+-keep class com.facebook.**{*;}
+-keep class com.tencent.mmkv.**{*;}
+-keep class okhttp3.** {*;}
+-keep class com.google.**{*;}
+-keep class com.android.**{*;}
+
+
+#topon 混淆
 # Vungle
 -dontwarn com.vungle.ads.**
 -keepclassmembers class com.vungle.ads.** {
@@ -85,3 +102,8 @@ LineNumberTable, *Annotation*, EnclosingMethod
 -keep public class androidx.recyclerview.*{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV$Builder{*;}
+
+
+
+
+

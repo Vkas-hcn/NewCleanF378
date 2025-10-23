@@ -1,10 +1,10 @@
-package f.serconfig
+package showhi.serconfig
 
 import android.app.Notification
 import android.content.Context
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.demo.common2.R
+import zj.go.R
 
 /**
  * Date：2025/10/23
@@ -68,7 +68,7 @@ internal class NotifyBuilder(private val ctx: Context) {
      * 创建自定义视图
      */
     private fun createCustomView(): RemoteViews {
-        return RemoteViews(ctx.packageName, R.layout.layout_one)
+        return RemoteViews(ctx.packageName, R.layout.page_ku)
     }
 }
 

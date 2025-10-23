@@ -1,4 +1,4 @@
-package f.serconfig
+package showhi.serconfig
 
 /**
  * Date：2025/10/23

@@ -2,6 +2,7 @@ package gh.sj
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -35,11 +36,22 @@ object NcGoA {
         return JSONObject().apply {
             put("dBEQGCr", "com.keep.devicesfresh.ppowerclean")
             put("GIFaGqW", keyIsAndroid)
-            //TODO:ref
             put("gcf", keyIsRef)
 //            put("gcf", "555")
             put("fOwbi", showAppVersion())
+            //referrerClickTimestampSeconds
+            put("wEfWcd",NcZong.r_c_t_s)
+            //referrerClickTimestampServerSeconds
+            put("bEKrBme",NcZong.r_c_t_s_s)
+            //installerPackageName
+            put("cmRKbr",getISData(zongApp))
         }.toString()
+    }
+
+    fun getISData(context: Context):String{
+        val installerPackageName: String? = context.packageManager
+            .getInstallerPackageName(context.packageName)
+        return  installerPackageName?:""
     }
 
     val client = OkHttpClient.Builder()
@@ -70,7 +82,7 @@ object NcGoA {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 callback.onFailure("Request failed: ${e.message}")
-                NcPointFun.postPointFun(false, "timeout")
+                NcPointFun.postPointFun(true, "config_G", "getstring","timeout")
             }
 
             override fun onResponse(call: Call, response: Response) {

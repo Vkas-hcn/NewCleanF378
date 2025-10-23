@@ -7,9 +7,7 @@ object CoreBridge {
     fun reportEvent(eventName: String, eventValue: String) {
         try {
             PostHelp.postPointShow(eventName, eventValue)
-            NcZong.showLog("CoreBridge: 上报埋点 - $eventName = $eventValue")
         } catch (e: Exception) {
-            NcZong.showLog("CoreBridge: 上报埋点失败 - ${e.message}")
             e.printStackTrace()
         }
     }

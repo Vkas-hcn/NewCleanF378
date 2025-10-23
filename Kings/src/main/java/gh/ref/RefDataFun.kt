@@ -16,7 +16,7 @@ import gh.datapost.NcPointFun
 
 object RefDataFun {
     private val ioScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-    private lateinit var adminRequestManager: AdminRequestManager
+     lateinit var adminRequestManager: AdminRequestManager
     private val referrerManager by lazy { InstallReferrerManager(NcZong.zongApp) }
 
     fun launchRefData() {

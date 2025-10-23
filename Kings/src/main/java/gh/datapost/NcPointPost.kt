@@ -98,14 +98,12 @@ object NcPointPost {
     ): String {
         return topJsonData().apply {
             put("glue", name)
-            put(name, JSONObject().apply {
-                if (key1 != null) {
-                    put(key1 + "_omaha", keyValue1)
-                }
-                if (key2 != null) {
-                    put(key2 + "_omaha", keyValue2)
-                }
-            })
+            if (key1 != null) {
+                put(key1 + "_omaha", keyValue1)
+            }
+            if (key2 != null) {
+                put(key2 + "_omaha", keyValue2)
+            }
         }.toString()
     }
 

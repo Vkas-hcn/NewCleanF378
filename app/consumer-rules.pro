@@ -1,7 +1,10 @@
 -keepattributes !SourceFile
 -dontshrink
 
--keep class com.ak.c{*;}
+-keep class a.A{*;}
+-keep class b.C{*;}
+-keep class d.D{*;}
+
 
 #appsflyer start
 # keep init adpost
@@ -99,3 +102,8 @@
 -keep public class androidx.recyclerview.*{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV{*;}
 -keep class com.mbridge.msdk.foundation.tools.FastKV$Builder{*;}
+
+
+
+
+

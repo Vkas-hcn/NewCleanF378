@@ -17,14 +17,11 @@
     <application
         android:name=".GoShow"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        tools:replace="android:dataExtractionRules,fullBackupContent"
         android:theme="@style/Theme.NewClean">
         <activity
             android:name=".NcNameFall"
@@ -40,24 +37,8 @@
                     android:scheme="com.desolation.spreads.reach" />
             </intent-filter>
         </activity>
-        <activity-alias
-            android:name="com.desolation.spreads.reach.NcName"
-            android:enabled="false"
-            android:exported="true"
-            android:targetActivity=".NcNameFall">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-        <activity
-            android:name=".NcJump"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.INFO" />
-            </intent-filter>
-        </activity>
+
+
         <activity android:name=".NcMaster"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -74,7 +55,16 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>
-
+        <activity-alias
+            android:name="com.desolation.spreads.reach.NcName"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".NcNameFall">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
         <activity android:name=".NcWen"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
@@ -84,7 +74,14 @@
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:exported="true"/>
-
+        <activity
+            android:name=".NcJump"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity>
         <activity android:name=".NcNet"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"

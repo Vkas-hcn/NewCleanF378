@@ -1,4 +1,4 @@
-package e
+package showcan.jk.bg.jk
 
 import android.content.ContentProvider
 import android.content.ContentValues

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- todo modify key name  -->
-    <string name="str_null">\n&#160;&#160;</string>
+    <string name="em_s_v">\n&#160;&#160;</string>
 
     <!--todo modify key name    -->
-    <string name="lab2_str">@string/lab3_str</string>
-    <string name="lab3_str">@string/lab4_str</string>
-    <string name="lab4_str">android.content.ContactDirectory</string>
+<!--    <string name="lab2_str">@string/lab3_str</string>-->
+<!--    <string name="lab3_str">@string/lab4_str</string>-->
+<!--    <string name="lab4_str">android.content.ContactDirectory</string>-->
 
 </resources>

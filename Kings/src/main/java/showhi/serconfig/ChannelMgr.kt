@@ -1,4 +1,4 @@
-package f.serconfig
+package showhi.serconfig
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

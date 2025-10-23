@@ -2,25 +2,28 @@ package gh.cark
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.ComponentName
 import android.content.Context
-import android.content.pm.PackageManager
 import android.provider.Settings
 import android.util.Log
-import com.bytedance.sdk.openadsdk.api.init.PAGConfig
-import com.bytedance.sdk.openadsdk.api.init.PAGSdk
-import com.thinkup.core.api.TUSDK
-import gh.ref.RefDataFun
+import com.appsflyer.AFAdRevenueData
+import com.appsflyer.AdRevenueScheme
+import com.appsflyer.AppsFlyerLib
+import com.appsflyer.MediationNetwork
+import gh.cark.init.step.InitStepA
+import gh.cark.init.step.InitStepB
+import gh.cark.init.step.InitStepC
 import gh.sj.MvS
-import gh.sj.ServiceHelper
-import zj.go.ll.DAL
-import zj.go.zhid.DOW
-import zj.go.zhid.DWPE
+import gh.i.DAL
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 object NcZong {
-    lateinit var  dal : DAL
+    lateinit var dal: DAL
     lateinit var zongApp: Application
+
+    //测试连接删除
     var isCanGo = true
 
     //admin配置缓存的key
@@ -37,35 +40,42 @@ object NcZong {
     // 安装事件缓存的key
     var insJsonMv by MvS.string()
     var isFCSate: Boolean by MvS.bool()
-    var isFCValue= "hjthjtude"
 
+    var r_c_t_s by MvS.string()
+    var r_c_t_s_s by MvS.string()
+    var isFCValue = "hjthjtude"
+    var dailyRequestLimit: Int = 1000
     fun initSp(app: Application) {
+        // 保存应用实例和配置
         zongApp = app
+        //TODO 环境切换
         isCanGo = false
-        MvS.init(app.filesDir.absolutePath)
-        enableAlias("com.desolation.spreads.reach.NcName",app)
-        registerActivityLifecycleCallbacks(app)
-        initializeAdSdk(app)
-        initToponAd()
-        ServiceHelper.startPeriodicService(app)
-        RefDataFun.launchRefData()
-        ServiceHelper.initAlly()
-        DOW.Companion.start(app)
-        DWPE.Companion.start(app)
-        SessFun.ssPostFun()
+
+        executeInitializationPhaseA(app)
+        executeInitializationPhaseB(app)
+        executeInitializationPhaseC(app)
+
+
     }
 
-    /**
-     * 注册Activity生命周期监听器
-     */
-    private fun registerActivityLifecycleCallbacks(app: Application) {
-         dal = DAL()
-        app.registerActivityLifecycleCallbacks(dal)
-        showLog("DAL Activity生命周期监听器已注册")
+
+    private fun executeInitializationPhaseA(app: Application) {
+        InitStepA.execute(app)
     }
+
+
+    private fun executeInitializationPhaseB(app: Application) {
+        InitStepB.execute(app)
+    }
+
+
+    private fun executeInitializationPhaseC(app: Application) {
+        InitStepC.execute(app)
+    }
+
 
     @SuppressLint("HardwareIds")
-     fun genAId(context: Context) {
+    fun genAId(context: Context) {
         if (aau.isEmpty()) {
             val androidId = Settings.Secure.getString(
                 context.contentResolver,
@@ -73,13 +83,15 @@ object NcZong {
             )
             val finalId = if (!androidId.isNullOrBlank()) androidId
             else UUID.randomUUID().toString()
-            aau= finalId
+            aau = finalId
         }
     }
 
-    fun showLog(msg: String){
-        if(isCanGo){return}
-        Log.e("Nc",msg)
+    fun showLog(msg: String) {
+        if (isCanGo) {
+            return
+        }
+        Log.e("Nc", msg)
     }
 
     fun getUpUrl(): String {
@@ -97,6 +109,7 @@ object NcZong {
             "https://azzs.keepdevicesfreshppowerclean.com/api/juyyu/"
         }
     }
+
     fun getPangKey(): String {
         return if (!isCanGo) {
             "8580262"
@@ -104,6 +117,7 @@ object NcZong {
             "8724634"
         }
     }
+
     fun getToPonAppId(): String {
         return if (!isCanGo) {
             "h670e13c4e3ab6"
@@ -111,6 +125,7 @@ object NcZong {
             "h68f607af46745"
         }
     }
+
     fun getToPonAppKey(): String {
         return if (!isCanGo) {
             "ac360a993a659579a11f6df50b9e78639"
@@ -118,48 +133,12 @@ object NcZong {
             "a8f710c2ccff5598a1cf15bb042179784"
         }
     }
+
     fun getApplyKey(): String {
         return if (!isCanGo) {
             "5MiZBZBjzzChyhaowfLpyR"
         } else {
-            ""
-        }
-    }
-    fun enableAlias(alias: String, context: Context) {
-        val pm = context.packageManager
-        pm.setComponentEnabledSetting(
-            ComponentName(context, alias),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
-        )
-    }
-
-    fun initToponAd(){
-        TUSDK.init(zongApp, getToPonAppId(), getToPonAppKey());
-
-    }
-    private fun initializeAdSdk(context: Context): Boolean {
-        val appId =getPangKey()
-        showLog("AppConfigManager.appIdPangle=$appId")
-
-        val config = PAGConfig.Builder().appId(appId).build()
-
-        return try {
-            PAGSdk.init(context, config, createPAGInitCallback())
-            true
-        } catch (e: Exception) {
-            showLog("Ad SDK initialization failed: ${e.message}")
-            false
-        }
-    }
-
-    private fun createPAGInitCallback() = object : PAGSdk.PAGInitCallback {
-        override fun success() {
-            Log.e("TAG", "PAGInitCallback new api init success")
-        }
-
-        override fun fail(code: Int, msg: String) {
-            Log.e("TAG", "PAGInitCallback new api init fail: $code")
+            "vcv6XtxaE3FmrrGZ7Fr9LC"
         }
     }
 
@@ -201,7 +180,7 @@ object NcZong {
         }
     }
 
-    fun getKeyTypeValue(jsonStr: String?,key: String): String {
+    fun getKeyTypeValue(jsonStr: String?, key: String): String {
         if (jsonStr.isNullOrBlank()) return ""
 
         try {

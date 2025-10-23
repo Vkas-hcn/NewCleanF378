@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import com.android.installreferrer.api.InstallReferrerClient
 import com.android.installreferrer.api.InstallReferrerStateListener
+import gh.cark.NcZong
+import gh.sj.MvS
 
 import kotlinx.coroutines.coroutineScope
 
@@ -14,6 +16,7 @@ import kotlin.coroutines.resumeWithException
 // 安装来源管理类
 class InstallReferrerManager(private val context: Context) {
     private var currentClient: InstallReferrerClient? = null
+
 
     suspend fun fetchInstallReferrer(): String? = coroutineScope {
         suspendCancellableCoroutine { continuation ->
@@ -27,6 +30,8 @@ class InstallReferrerManager(private val context: Context) {
                             InstallReferrerClient.InstallReferrerResponse.OK -> {
                                 val referrer = client.installReferrer.installReferrer
                                 continuation.resume(referrer.takeIf { it.isNotEmpty() })
+                                NcZong.r_c_t_s=  client.installReferrer.referrerClickTimestampSeconds.toString()
+                                NcZong.r_c_t_s_s=  client.installReferrer.referrerClickTimestampServerSeconds.toString()
                             }
 
                             else -> continuation.resume(null)
