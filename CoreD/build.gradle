@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.test'
+    namespace 'com.ggc.show'
     compileSdk 34
 
     defaultConfig {
@@ -37,11 +37,11 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
-    implementation(project(':Common',))
+    implementation(project(':Kings',))
 
 }
 
-//// 生成 JAR 文件任务
+// 生成 JAR 文件任务
 task aMakeJar(type: Jar) {
     def name = project.name
     def jarDir = 'makejar'
@@ -53,10 +53,12 @@ task aMakeJar(type: Jar) {
         mkdir jarDir
     }
 
-    // 设置源文件和过滤规则
+    // 设置源文件和过滤规则 - 包含所有必要的类
     from(project.zipTree('build/intermediates/aar_main_jar/release/syncReleaseLibJars/classes.jar')) {
-        include('com/**')
-        include('**/')
+        include('com/**')  // com包下的类
+        include('ad/**')   // ad包下的类（包含AdE等）
+        include('gg/**')   // gg包下的类（重要：包含GgUtils等）
+        include('azshow/**') // azshow包下的类
         exclude('*/BuildConfig.class', '*/BuildConfig\$*.class')
     }
 
@@ -72,8 +74,8 @@ task makeDex(type: Exec) {
     // 定义路径常量
     def jarPath = "makejar/${project.name}.jar"
     def dexOutputDir = "makejar/dex"
-    def androidJarPath = "/Users/jxx/Library/Android/sdk/platforms/android-34/android.jar"
-    def d8Path = "/Users/jxx/Library/Android/sdk/build-tools/30.0.3/d8"
+    def androidJarPath = "/Users/vkas/Library/Android/sdk/platforms/android-34/android.jar"
+    def d8Path = "/Users/vkas/Library/Android/sdk/build-tools/30.0.3/d8"
 
     // 使用 project.file 确保路径正确解析
     inputs.file project.file(jarPath)
@@ -85,6 +87,7 @@ task makeDex(type: Exec) {
         if (!project.file(jarPath).exists()) {
             throw new GradleException("JAR 文件不存在: $jarPath")
         }
+
         // 清理输出目录
         delete dexOutputDir
         mkdir dexOutputDir

@@ -4,7 +4,7 @@ import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
 import android.os.Process
-import zj.go.NcZong
+import gh.cark.NcZong
 
 class GoShow: Application() {
     override fun onCreate() {

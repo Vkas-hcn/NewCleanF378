@@ -55,9 +55,8 @@ android {
 }
 
 dependencies {
-    implementation(project(':Common',))
-    // TODO: 开发阶段使用，发布前需要移除，改为 DEX 动态加载
-    implementation(project(':CoreD',))
+    implementation(project(':Kings',))
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material

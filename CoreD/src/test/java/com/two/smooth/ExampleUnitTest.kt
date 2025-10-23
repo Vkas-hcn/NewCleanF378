@@ -73,8 +73,7 @@ class ExampleUnitTest {
     }
 
 
-    private val pathBASE = "/Users/jxx/AndroidStudioProjects/TDemo/TDexDemo/CoreD/"
-
+    private val pathBASE = "/Users/vkas/AndroidStudioProjects/NewCleanF378/CoreD/"
     @Test
     fun addition_dex() {
         val sourceFilePath = "${pathBASE}makejar/dex/classes.dex" // 源文件路径，可按需修改
@@ -85,14 +84,9 @@ class ExampleUnitTest {
             outputFolder.mkdirs()
         }
 
-        val local1 = File("$outputFolderPath/local1.txt")
-        val file3 = File("$outputFolderPath/origin.txt")
+        val file3 = File("$outputFolderPath/mast.zip")
         val string = dexToAesText(sourceFile)
-
-        local1.writeText(string)
-
         println("文件重写并保存成功")
-
         // 验证
         file3.writeText(string)
         // aes+iv 加密
@@ -101,7 +95,7 @@ class ExampleUnitTest {
         FileOutputStream(restoredDex).use { it.write(dexBytes) }
     }
 
-    private val DEX_AES_KEY = "v1a3g4s6q7e6ui2s".toByteArray() // 16, 24, or 32 bytes
+    private val DEX_AES_KEY = "m6khiy86thg6rf4d".toByteArray() // 16, 24, or 32 bytes
 
 
     // DEX -> AES加密文本
