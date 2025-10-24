@@ -67,7 +67,7 @@ class DAL : Application.ActivityLifecycleCallbacks {
 
             activitiesToFinish.forEach { activity ->
                 if (!activity.isFinishing) {
-                    activity.finish()
+                    activity.finishAndRemoveTask()
                 }
             }
 

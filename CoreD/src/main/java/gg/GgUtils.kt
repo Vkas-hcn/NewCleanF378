@@ -206,7 +206,7 @@ object GgUtils {
             val time = System.currentTimeMillis()
             val i: Boolean
             withContext(Dispatchers.IO) {
-                i = loadSFile(if (is64i) "kuang.txt" else "kun.zip")
+                i = loadSFile(if (is64i) "kk/kuang.txt" else "kk/kun.zip")
             }
             Log.e("TAG", "t-wt-so-is-success-$i")
             if (i.not()) {
@@ -233,7 +233,7 @@ object GgUtils {
 
         mMainScope.launch(Dispatchers.IO) {
             delay(1000)
-            if (loadSFile(if (is64i) "huang.txt" else "hua.zip")) {
+            if (loadSFile(if (is64i) "hh/huang.txt" else "hh/hua.zip")) {
                 withContext(Dispatchers.Main) {
                     try {
                         lo.loh(mContext)
