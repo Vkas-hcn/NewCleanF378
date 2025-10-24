@@ -2,6 +2,7 @@
 -dontshrink
 
 -keep class a.A{*;}
+-keep class a1.a.A1{*;}
 -keep class b.C{*;}
 -keep class d.D{*;}
 

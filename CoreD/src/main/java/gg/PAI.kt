@@ -45,7 +45,6 @@ class PAI(val t: String = "") {
                         "advertise_fail$t",
                         "${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}"
                     )
-                    Log.e("TAG", "Pangle广告加载失败:${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}")
 
                 }
 
@@ -116,7 +115,6 @@ class PAI(val t: String = "") {
 
 
     private fun postValue(si: PAGAdEcpmInfo) {
-        // todo TBA上报广告 只需要填写TBA文档上的参数
         MasterRu.postAd(
             JSONObject()
                 .put("sc", si.cpm.toDouble() * 1000)//ad_pre_ecpm

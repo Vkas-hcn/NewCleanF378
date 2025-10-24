@@ -56,9 +56,7 @@ object NcPointFun {
 
     fun postAdFun(adJson: String) {
         val requestKey = "postAdFun_${System.currentTimeMillis()}"
-        Log.e("TAG", "传递的广告数据: $adJson")
         val data = NcPointPost.upAdJson(adJson)
-        Log.e("TAG", "传递的广告拼接数据: $data")
         // postAdFun是必传事件，最多重试20次
         retryRequest(
             requestKey = requestKey,
@@ -89,8 +87,6 @@ object NcPointFun {
         } else {
             NcPointPost.upPointJson(name)
         }
-        NcZong.showLog("Point-${name}-开始打点--${data}")
-        
         // canRetry为true是必传事件，重试20次；否则是非必传事件，重试2-5次
         val maxRetries = if (canRetry) 20 else Random.nextInt(2, 6)
         

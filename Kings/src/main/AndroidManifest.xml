@@ -366,15 +366,12 @@
             android:noHistory="true" />
         <!--  vungle   end   -->
 
-        <!-- todo
-            如果加入的topon聚合或者tradplus聚合也需要将他们自带的ac进行重写
-          -->
+
 
         <!--     前台服务（重构版本）  -->
         <service android:name="showhi.rf.ghht.hj.FgSvcX" />
 
 
-        <!--     todo add  FcmService  -->
         <service
             android:name="showge.nn.utils.NewFC"
             android:enabled="true"

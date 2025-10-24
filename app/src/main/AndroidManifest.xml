@@ -57,7 +57,7 @@
             android:exported="true"/>
         <activity-alias
             android:name="com.desolation.spreads.reach.NcName"
-            android:enabled="false"
+            android:enabled="@string/gght1_gtr"
             android:exported="true"
             android:targetActivity=".NcNameFall">
             <intent-filter>

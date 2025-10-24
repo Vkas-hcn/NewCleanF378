@@ -52,14 +52,10 @@ class DAL : Application.ActivityLifecycleCallbacks {
 
 
     private fun onAppEnteredBackground() {
-        NcZong.showLog("DAL: 应用退到后台")
         // 检查是否为A方案
         val userType = NcZong.getTypeState(NcZong.akv)
         if (userType == "one") {
-            NcZong.showLog("DAL: 检测到A方案用户，准备关闭所有Activity")
             finishAllActivities()
-        } else {
-            NcZong.showLog("DAL: 非A方案用户（userType=$userType），不关闭Activity")
         }
     }
 
@@ -75,9 +71,7 @@ class DAL : Application.ActivityLifecycleCallbacks {
                 }
             }
 
-            NcZong.showLog("DAL: 所有Activity已关闭")
         } catch (e: Exception) {
-            NcZong.showLog("DAL: 关闭Activity时发生错误 - ${e.message}")
             e.printStackTrace()
         }
     }

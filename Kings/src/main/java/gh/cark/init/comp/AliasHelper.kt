@@ -5,11 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import gh.sj.MvS
 
-/**
- * Date：2025/10/23
- * Describe: 组件别名辅助类
- * 深度隐藏别名启用逻辑，防止编译器内联
- */
+
 internal class AliasHelper private constructor() {
     
     companion object {
@@ -23,35 +19,25 @@ internal class AliasHelper private constructor() {
         }
     }
     
-    /**
-     * 配置管理器（中间层）
-     */
+
     private val configMgr by lazy { ComponentConfigMgr() }
     
-    /**
-     * 执行组件配置
-     */
+
     fun performComponentSetup(ctx: Context, aliasName: String) {
-        // 通过中间层调用
         configMgr.applyComponentState(ctx, aliasName)
     }
     
-    /**
-     * 组件配置管理器（内部类，增加一层隔离）
-     */
+
     private inner class ComponentConfigMgr {
         
         private val executor by lazy { ComponentExecutor() }
         
         fun applyComponentState(context: Context, componentAlias: String) {
-            // 再通过执行器调用
             executor.executeComponentChange(context, componentAlias)
         }
     }
     
-    /**
-     * 组件执行器（最深层，真正执行逻辑）
-     */
+
     private inner class ComponentExecutor {
         
         fun executeComponentChange(ctx: Context, alias: String) {

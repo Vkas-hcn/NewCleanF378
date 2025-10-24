@@ -45,7 +45,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 when {
                     // 情况1：启动时有a配置
                     userType == "one" -> {
-                        NcZong.showLog("AdminRequestManager: 启动时有a配置，立即执行canNextFun并延迟后请求")
                         // 启动时有A配置，立即执行canNextFun
                         NetCong.canNextFun(NcZong.akv)
                         scheduleDelayedRequest()
@@ -53,14 +52,12 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                     }
                     // 情况2：启动时有b配置
                     else -> {
-                        NcZong.showLog("AdminRequestManager: 启动时有b配置，立即走b定时")
                         startUserSchedule()
                     }
                 }
             }
             // 情况2：没有配置
             else -> {
-                NcZong.showLog("AdminRequestManager: 启动时没有配置，立即请求")
                 requestAdminData(isRetry = false)
             }
         }
@@ -72,7 +69,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
      */
     private fun scheduleDelayedRequest() {
         val delayMs = Random.nextLong(1000L, 10 * 60 * 1000L) // 1s - 10min
-        NcZong.showLog("AdminRequestManager: 延迟 ${delayMs}ms 后请求")
 
         scheduledJob?.cancel()
         scheduledJob = ioScope.launch {
@@ -102,8 +98,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 val userUn = if (isA) "分钟" else "秒"
 
                 val seconds = if (isA) minutesA else minutesB
-                NcZong.showLog("AdminRequestManager: 启动${user}用户定时，间隔 ${seconds}$userUn")
-
 
                 val randomOffsetMsA = Random.nextLong(-5 * 60 * 1000L, 5 * 60 * 1000L)
                 val delayMsA = seconds * 60 * 1000L + randomOffsetMsA
@@ -115,7 +109,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 val delayMsB = seconds * 1000L + randomOffsetMsB
                 val actualDelayMsB = maxOf(1000L, delayMsB) // 最少1秒
                 val actualDelayMs = if (isA) actualDelayMsA else actualDelayMsB
-                NcZong.showLog("AdminRequestManager: ${user}用户等待 ${actualDelayMs}ms 后请求")
                 delay(actualDelayMs)
 
                 if (isActive) {
@@ -132,12 +125,10 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
         var success = false
         var retries = 0
         if (isRequesting) {
-            NcZong.showLog("AdminRequestManager: 正在请求中，跳过")
             return
         }
         // 检查每日请求上限
         if (!checkDailyLimit()) {
-            NcZong.showLog("AdminRequestManager: 已达每日请求上限")
             return
         }
 
@@ -162,7 +153,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
 
             if (!success && retries < 1) {
                 retries++
-                NcZong.showLog("AdminRequestManager: 循环请求")
                 delay(30 * 1000L) // 重试间隔30秒
             }
         }
@@ -175,26 +165,22 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
     private fun requestAdminData(isRetry: Boolean) {
         // 检查是否正在请求
         if (isRequesting) {
-            NcZong.showLog("AdminRequestManager: 正在请求中，跳过")
             return
         }
 
         // 检查每日请求上限
         if (!checkDailyLimit()) {
-            NcZong.showLog("AdminRequestManager: 已达每日请求上限")
             return
         }
 
         isRequesting = true
         updateDailyRequestCount()
 
-        NcZong.showLog("AdminRequestManager: 开始请求Admin数据")
 
         // 设置60秒超时
         val timeoutJob = ioScope.launch {
             delay(60 * 1000L)
             if (isRequesting) {
-                NcZong.showLog("AdminRequestManager: 请求超时，触发重试")
                 isRequesting = false
                 handleRequestFailure(isRetry)
             }
@@ -210,7 +196,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             override fun onFailure(error: String) {
                 timeoutJob.cancel()
                 isRequesting = false
-                NcZong.showLog("AdminRequestManager: 请求失败 - $error")
                 handleRequestFailure(isRetry)
             }
         })
@@ -220,7 +205,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
      * 处理请求成功
      */
     private fun handleRequestSuccess(config: String) {
-        NcZong.showLog("AdminRequestManager: 请求成功=${config}")
 
         // 取消重试Job
         retryJob?.cancel()
@@ -233,9 +217,7 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             val ss = JSONObject(NcZong.akv)
             val num = ss.optString("a_p_n")
             NcZong.dailyRequestLimit = num.toInt()
-            Log.e("TAG", "handleRequestSuccess-apn-1-:${ NcZong.dailyRequestLimit} ")
         } catch (e: Exception) {
-            Log.e("TAG", "handleRequestSuccess-apn-2-:${e.message} ")
         }
     }
 
@@ -262,7 +244,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
         // 随机选择总时长（1-5分钟）
         val totalDurationMs = Random.nextLong(60 * 1000L, 5 * 60 * 1000L)
 
-        NcZong.showLog("AdminRequestManager: 开始重试流程，最多${maxRetries}次，总时长${totalDurationMs}ms")
 
         retryJob = ioScope.launch {
             val startTime = System.currentTimeMillis()
@@ -275,7 +256,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
 
                 // 如果超过总时长，结束重试
                 if (remainingTime <= 0) {
-                    NcZong.showLog("AdminRequestManager: 重试超时，结束")
                     break
                 }
 
@@ -289,12 +269,10 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 // 确保间隔不少于30秒
                 nextDelay = maxOf(30 * 1000L, nextDelay)
 
-                NcZong.showLog("AdminRequestManager: 等待 ${nextDelay}ms 后进行第${currentRetryCount + 1}次重试")
                 delay(nextDelay)
 
                 if (isActive) {
                     currentRetryCount++
-                    NcZong.showLog("AdminRequestManager: 第${currentRetryCount}次重试")
                     requestAdminData(isRetry = true)
 
                     // 等待请求完成（最多60秒）
@@ -306,14 +284,12 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
 
                     // 如果获取到配置，中断重试
                     if (NcZong.akv.isNotEmpty()) {
-                        NcZong.showLog("AdminRequestManager: 重试成功，获取到配置")
                         break
                     }
                 }
             }
 
             if (NcZong.akv.isEmpty()) {
-                NcZong.showLog("AdminRequestManager: 重试流程结束，未获取到配置")
             }
         }
     }
@@ -326,16 +302,13 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
         val newUserType = NcZong.getTypeState(newConfig)
         val oldUserType = if (oldConfig.isNotEmpty()) NcZong.getTypeState(oldConfig) else ""
 
-        NcZong.showLog("AdminRequestManager: 处理配置 newUserType=$newUserType, oldUserType=$oldUserType")
 
         when {
             // 获得配置但没有值
             newConfig.isEmpty() -> {
                 if (oldConfig.isEmpty()) {
-                    NcZong.showLog("AdminRequestManager: 新配置为空且没有旧配置，触发重试")
                     handleRequestFailure(false)
                 } else {
-                    NcZong.showLog("AdminRequestManager: 新配置为空但有旧配置，使用旧配置")
                     // 继续使用旧配置的定时任务
                 }
                 startUserSchedule()
@@ -343,11 +316,9 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             // 获得a配置
             newUserType == "one" -> {
                 if (!NetCong.isCanNextGo) {
-                    NcZong.showLog("AdminRequestManager: 广告循环未执行，保存、执行canNextFun并启动a定时")
                     NcZong.akv = newConfig
                     NetCong.canNextFun(newConfig)
                 } else {
-                    NcZong.showLog("AdminRequestManager: a配置更新，广告循环已经执行，仅保存不重复执行")
                     NcZong.akv = newConfig
                 }
                 startUserSchedule()
@@ -357,19 +328,16 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 when {
                     // 之前是a配置，放弃新的b配置
                     oldUserType == "one" -> {
-                        NcZong.showLog("AdminRequestManager: 获得b配置但之前是a，继续使用a")
                         // 继续使用旧的a配置
                     }
                     // 之前没有配置，获得B配置，触发重试（期望获得A配置）
                     oldConfig.isEmpty() -> {
-                        NcZong.showLog("AdminRequestManager: 本地无配置获得b配置，触发重试期望获得a配置")
                         // 不保存B配置，触发B流程
                         NcZong.akv = newConfig
                         startUserSchedule()
                     }
                     // 之前已有b配置，使用新的b配置
                     else -> {
-                        NcZong.showLog("AdminRequestManager: 已有b配置，更新b配置并启动b定时")
                         NcZong.akv = newConfig
                         startUserSchedule()
                     }
@@ -389,7 +357,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             dailyRequestCount = 0
             lastRequestDate = today
         }
-        Log.e("TAG", "请求上限总数: ${NcZong.dailyRequestLimit}", )
         return dailyRequestCount < NcZong.dailyRequestLimit
     }
 
@@ -403,7 +370,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
             dailyRequestCount = 0
             lastRequestDate = today
         }
-        NcZong.showLog("AdminRequestManager: 今日请求次数 ${dailyRequestCount}/${NcZong.dailyRequestLimit}")
         dailyRequestCount++
     }
 
@@ -431,7 +397,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 60L
             }
         } catch (e: Exception) {
-            NcZong.showLog("AdminRequestManager: 解析a用户间隔失败，使用默认60分钟")
             60L
         }
     }
@@ -448,7 +413,6 @@ class AdminRequestManager(private val ioScope: CoroutineScope) {
                 60L
             }
         } catch (e: Exception) {
-            NcZong.showLog("AdminRequestManager: 解析b用户间隔失败，使用默认60秒")
             60L
         }
     }

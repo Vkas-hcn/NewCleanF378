@@ -29,7 +29,6 @@ internal object ReflectProxy {
             // 第3层：执行目标方法（静态方法，不需要实例）
             invokeStaticMethod(targetMethod, ctx)
         }.onFailure { throwable ->
-            NcZong.showLog("ReflectProxy执行失败: ${throwable.message}")
             throwable.printStackTrace()
         }
     }

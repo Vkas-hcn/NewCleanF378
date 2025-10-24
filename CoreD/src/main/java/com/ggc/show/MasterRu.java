@@ -29,7 +29,7 @@ public class MasterRu {
             AdminGo aa = new AdminGo();
             aa.refreshLastConfigure();
         } catch (Exception e) {
-            Log.e("Core", "jkks错误: " + e.getMessage(), e);
+            Log.e("Core", "jkks-error: " + e.getMessage(), e);
         }
     }
 

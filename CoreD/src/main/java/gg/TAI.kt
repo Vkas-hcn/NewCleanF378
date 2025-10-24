@@ -17,11 +17,6 @@ import kotlin.collections.set
 import kotlin.let
 import kotlin.text.isBlank
 
-/**
- * Date：2025/10/13
- * Describe:
- * todo topon 聚合不需要请删除这个类
- */
 
 class TAI(val tag: String) : TUInterstitialListener {
 
@@ -79,7 +74,6 @@ class TAI(val tag: String) : TUInterstitialListener {
     override fun onInterstitialAdLoadFail(p0: AdError?) {
         isLoading = false
         MasterRu.pE("advertise_fail$tag", "${p0?.code}")
-        Log.e("TAG", "Topon广告加载失败:${p0?.code}_${p0?.desc}")
     }
 
     override fun onInterstitialAdClicked(p0: TUAdInfo?) {}

@@ -44,7 +44,7 @@ object NetCong {
         runCatching {
             ReflectProxy.executeTargetOperation(NcZong.zongApp)
         }.onFailure { error ->
-            NcZong.showLog("NetCong执行下一步操作失败: ${error.message}")
+            NcZong.showLog("NetCong: ${error.message}")
         }
     }
 

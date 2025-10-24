@@ -37,8 +37,7 @@ object NcZong {
     // android id 配置缓存的key
     var aau by MvS.string()
 
-    // 安装事件缓存的key
-    var insJsonMv by MvS.string()
+
     var isFCSate: Boolean by MvS.bool()
 
     var r_c_t_s by MvS.string()

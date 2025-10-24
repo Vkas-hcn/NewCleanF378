@@ -10,17 +10,7 @@ import showhi.serconfig.NotifyBuilder
 import showhi.serconfig.SvcStateMgr
 import gh.sj.ServiceHelper
 
-/**
- * Date：2025/10/23
- * Describe: 前台服务（重构版本）
- * 使用模块化管理器实现前台服务功能
- *
- * 功能说明：
- * - 在onCreate中初始化通知渠道和通知
- * - 在onStartCommand中启动前台服务
- * - 在onDestroy中更新服务状态
- * - 使用START_STICKY模式确保服务持久运行
- */
+
 class FgSvcX : Service() {
 
     // 通知渠道管理器

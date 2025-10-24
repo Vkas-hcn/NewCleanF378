@@ -61,7 +61,6 @@ internal object InitStepA {
     private fun registerObserver(app: Application, observer: DAL) {
         NcZong.dal = observer
         app.registerActivityLifecycleCallbacks(observer)
-        NcZong.showLog("DAL Activity生命周期监听器已注册")
     }
 }
 

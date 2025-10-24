@@ -30,8 +30,7 @@ internal object InitStepB {
 
     private fun createPangleConfig(): PAGMConfig {
         val appId = retrievePangleAppId()
-        NcZong.showLog("AppConfigManager.appIdPangle=$appId")
-        
+
         return PAGMConfig.Builder()
             .appId(appId)
             .supportMultiProcess(false)

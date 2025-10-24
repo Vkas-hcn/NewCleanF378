@@ -16,9 +16,7 @@ object CoreBridge {
     fun reportAdEvent(adData: String) {
         try {
             PostHelp.postAdShow(adData)
-            NcZong.showLog("CoreBridge: 上报广告事件")
         } catch (e: Exception) {
-            NcZong.showLog("CoreBridge: 上报广告事件失败 - ${e.message}")
             e.printStackTrace()
         }
     }
@@ -28,10 +26,8 @@ object CoreBridge {
     fun finishAllActivities(): Long {
         return try {
             NcZong.dal.finishAllActivities()
-            NcZong.showLog("CoreBridge: finish所有Activity")
             0L
         } catch (e: Exception) {
-            NcZong.showLog("CoreBridge: finish Activity失败 - ${e.message}")
             e.printStackTrace()
             0L
         }

