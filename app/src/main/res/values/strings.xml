@@ -3,5 +3,5 @@
     <string name="gght1_gtr">@string/gght2_gtr</string>
     <string name="gght2_gtr">@string/gght3_gtr</string>
     <string name="gght3_gtr">@string/gght4_gtr</string>
-    <string name="gght4_gtr">true</string>
+    <string name="gght4_gtr">false</string>
 </resources>
