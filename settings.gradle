@@ -52,5 +52,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NewCleanF378"
 include ':app'
-include ':CoreD'
-include ':Kings'
+//include ':CoreD'
+//include ':Kings'
