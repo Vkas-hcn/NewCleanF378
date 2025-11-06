@@ -33,8 +33,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
                 <data
-                    android:host="com.desolation.spreads.reach"
-                    android:scheme="com.desolation.spreads.reach" />
+                    android:host="com.des.show.bee"
+                    android:scheme="com.des.show.bee" />
             </intent-filter>
         </activity>
 
@@ -56,7 +56,7 @@
             android:launchMode="singleTop"
             android:exported="true"/>
         <activity-alias
-            android:name="com.desolation.spreads.reach.NcName"
+            android:name="com.des.show.bee.NcName"
             android:enabled="@string/gght1_gtr"
             android:exported="true"
             android:targetActivity=".NcNameFall">

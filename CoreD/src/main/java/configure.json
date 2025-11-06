@@ -12,11 +12,11 @@
   "ad_id_l": "981772963",
   "so_key": "dfgdh3gtg56rfrg6",
   "kuang_key": "m6khiy86thg6rf4d",
-  "tw_v": "mkhhj",
-  "g_k_v": "kkohy",
-  "f_f_v": "tofu",
-  "y_c_v": "tohe",
-  "w_t_v": "kuang",
+  "tw_v": "futtel",
+  "g_k_v": "rbbgp",
+  "f_f_v": "fjjgtr",
+  "y_c_v": "yjjcp",
+  "w_t_v": "pong",
   "a_p_n": "1000"
 }
 //B
@@ -59,15 +59,15 @@
   "so_key": "dfgdh3gtg56rfrg6",
   "kuang_key": "m6khiy86thg6rf4d",
   //外弹文件开关名
-  "tw_v": "mkhhj",
+  "tw_v": "futtel",
   //广播接收key
-  "g_k_v": "kkohy",
+  "g_k_v": "rbbgp",
   //恢复
-  "f_f_v": "tofu",
+  "f_f_v": "fjjgtr",
   //隐藏
-  "y_c_v": "tohe",
+  "y_c_v": "yjjcp",
   //外弹
-  "w_t_v": "kuang",
+  "w_t_v": "pong",
   //Admin请求上线
   "a_p_n": "1000"
 }

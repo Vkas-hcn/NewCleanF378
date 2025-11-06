@@ -35,7 +35,7 @@ object NcGoA {
         val keyIsAndroid = NcZong.aau
         val keyIsRef = NcZong.ifk
         return JSONObject().apply {
-            put("dBEQGCr", "com.keep.devicesfresh.ppowerclean")
+            put("dBEQGCr", "com.dash.goclean.day")
             put("GIFaGqW", keyIsAndroid)
             put("gcf", keyIsRef)
 //            put("gcf", "555")

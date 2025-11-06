@@ -17,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec
 class ExampleUnitTest {
     private val soName = "libncku.so"
     private val progetName = "T714"
-    private val name64 = "kuang.txt"
+    private val name64 = "pong.txt"
     private val name32 = "kun.zip"
 
     // h5

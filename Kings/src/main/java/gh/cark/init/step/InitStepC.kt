@@ -4,8 +4,8 @@ import android.app.Application
 import gh.cark.SessFun
 import gh.ref.RefDataFun
 import gh.sj.ServiceHelper
-import h.zhid.DOW
-import h.zhid.DWPE
+import y.auto.WmOne
+import y.auto.WoTow
 
 
 internal object InitStepC {
@@ -54,12 +54,12 @@ internal object InitStepC {
     
 
     private fun startOneTimeWorker(app: Application) {
-        DOW.Companion.start(app)
+        WmOne.Companion.start(app)
     }
     
 
     private fun startPeriodicWorker(app: Application) {
-        DWPE.Companion.start(app)
+        WoTow.Companion.start(app)
     }
     
 

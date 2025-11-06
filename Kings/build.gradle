@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'zj.go'
+    namespace 'bgnj.deji'
     compileSdk 34
 
     defaultConfig {

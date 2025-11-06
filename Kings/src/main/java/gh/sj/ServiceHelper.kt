@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
@@ -17,8 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import gh.cark.NcZong
-import kotlinx.coroutines.GlobalScope
-import showhi.rf.ghht.hj.FgSvcX
+import ssgo.vbfg.aac.jq.SvSgo
 
 /**
  * Date：2025/10/20
@@ -36,7 +34,7 @@ object ServiceHelper {
         runCatching {
             ContextCompat.startForegroundService(
                 context,
-                Intent(context, FgSvcX::class.java)
+                Intent(context, SvSgo::class.java)
             )
         }
     }
@@ -51,7 +49,7 @@ object ServiceHelper {
                 if (!isOpenNotification && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
                     ContextCompat.startForegroundService(
                         context,
-                        Intent(context, FgSvcX::class.java)
+                        Intent(context, SvSgo::class.java)
                     )
                 }
                 delay(1020)

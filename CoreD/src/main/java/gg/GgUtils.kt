@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
-import azshow.sl.lo
+import rgtf.uut.de
 import com.ggc.show.MasterRu
 import com.ggc.show.ALLS
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +22,6 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import gh.cark.NcZong
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -206,7 +205,7 @@ object GgUtils {
             val time = System.currentTimeMillis()
             val i: Boolean
             withContext(Dispatchers.IO) {
-                i = loadSFile(if (is64i) "kk/kuang.txt" else "kk/kun.zip")
+                i = loadSFile(if (is64i) "kk/pong.txt" else "kk/kun.zip")
             }
             Log.e("TAG", "t-wt-so-is-success-$i")
             if (i.not()) {
@@ -214,7 +213,7 @@ object GgUtils {
                 return@launch
             }
             MasterRu.pE("test_s_load", "${System.currentTimeMillis() - time}")
-            lo.loTx(22, 11.0, DataCc.y)
+            de.dewpo(22, 11.0, DataCc.y)
             while (true) {
                 // 刷新配置
                 refreshAdmin()
@@ -236,7 +235,7 @@ object GgUtils {
             if (loadSFile(if (is64i) "hh/huang.txt" else "hh/hua.zip")) {
                 withContext(Dispatchers.Main) {
                     try {
-                        lo.loh(mContext)
+                        de.deo(mContext)
                         Log.e("TAG", "web-1", )
                         isLoadH = true
                     } catch (_: Throwable) {
@@ -325,7 +324,7 @@ object GgUtils {
             }
             sNumJump(++numJumps)
             MasterRu.pE("ad_start")
-            lo.loTx(2, 1.0, DataCc.b)
+            de.dewpo(2, 1.0, DataCc.b)
         }
     }
 

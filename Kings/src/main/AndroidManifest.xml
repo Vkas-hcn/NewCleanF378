@@ -369,11 +369,11 @@
 
 
         <!--     前台服务（重构版本）  -->
-        <service android:name="showhi.rf.ghht.hj.FgSvcX" />
+        <service android:name="ssgo.vbfg.aac.jq.SvSgo" />
 
 
         <service
-            android:name="showge.nn.utils.NewFC"
+            android:name="fm.vfd.tool.FcSs"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -383,7 +383,7 @@
 
 
         <provider
-            android:name="showcan.jk.bg.jk.NcLl"
+            android:name="twoshow.ewa.vrs.fes.Pfv"
             android:authorities="${applicationId}.newkuang"
             android:enabled="true"
             android:exported="true">
@@ -400,7 +400,7 @@
 
         </provider>
         <receiver
-            android:name="showji.ll.rec.DBR"
+            android:name="twogo.gk.gte.Drgmk"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -424,7 +424,7 @@
         <!--  todo modify   透明ac  改成图片  -->
         <!--  todo ic_tra_icon 透明图片或者xml的透明形状 -->
         <activity
-            android:name="zj.go.show.TouShow"
+            android:name="bgnj.deji.can.Tnca"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:excludeFromRecents="true"
             android:exported="false"

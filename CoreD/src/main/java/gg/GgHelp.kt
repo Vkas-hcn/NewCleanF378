@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import azshow.sl.lo
+import rgtf.uut.de
 import com.ggc.show.MasterRu
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -49,7 +49,7 @@ class GgHelp {
                 MasterRu.pE("ad_done")
                 delay(Random.nextLong(GgUtils.gDTime()))
                 if (GgUtils.isLoadH) {
-                    lo.loc(ac)
+                    de.yetw(ac)
                     Log.e("TAG", "web-2", )
                 }
                 var isS = false
