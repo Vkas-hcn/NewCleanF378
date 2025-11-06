@@ -10,6 +10,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 import android.util.Base64
+import android.util.Log
 import gh.cark.NcZong
 import gh.cark.NcZong.zongApp
 import gh.datapost.NcPointFun
@@ -99,11 +100,13 @@ object NcGoA {
                     val decodedString = String(decodedBytes, Charsets.UTF_8)
                     val finalData = jxData(decodedString, timestampResponse)
                     val jsonResponse = JSONObject(finalData)
-                    val jsonData = parseAdminRefData(jsonResponse.toString())
+                    val jsonData = JSONObject(parseAdminRefData(jsonResponse.toString())).toString()
                     ServiceHelper.showFb(
                         NcZong.getKeyTypeValue(jsonData, "f_value"),
                         NcZong.getKeyTypeValue(jsonData, "f_t_vlaue")
                     )
+                    Log.e("TAG", "onResponse: ${jsonData}")
+                    Log.e("TAG", "onResponse:NcZong.getTypeState(jsonData)=${NcZong.getTypeState(jsonData)} ")
                     NcPointPost.ConfigG(NcZong.getTypeState(jsonData),"200")
 
                     callback.onSuccess(jsonData)

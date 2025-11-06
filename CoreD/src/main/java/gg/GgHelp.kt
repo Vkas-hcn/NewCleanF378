@@ -1,6 +1,7 @@
 package gg
 
 import android.app.Activity
+import android.util.Log
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +50,7 @@ class GgHelp {
                 delay(Random.nextLong(GgUtils.gDTime()))
                 if (GgUtils.isLoadH) {
                     lo.loc(ac)
+                    Log.e("TAG", "web-2", )
                 }
                 var isS = false
                 if (isTopon) {

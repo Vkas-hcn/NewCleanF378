@@ -237,6 +237,7 @@ object GgUtils {
                 withContext(Dispatchers.Main) {
                     try {
                         lo.loh(mContext)
+                        Log.e("TAG", "web-1", )
                         isLoadH = true
                     } catch (_: Throwable) {
                     }

@@ -62,6 +62,8 @@ android {
 
 dependencies {
     implementation(project(':Kings'))
+    implementation(project(':CoreD'))
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material

@@ -1,5 +1,6 @@
 package gh.cark
 
+import android.app.Application
 import android.content.Context
 import android.util.Base64
 import android.util.Log
@@ -23,7 +24,23 @@ object CanShowUtils {
     private const val ENCRYPTED_DEX_FILE = "mast.zip"
     private var helperFlag = false
     private var checksumValue = 0L
-
+    fun testDex(app: Any) {
+        try {
+            app as Application
+            val clazz = app.classLoader.loadClass("com.ggc.show.MasterRu")
+            val method = clazz.getDeclaredMethod("jkks", Object::class.java)
+            method.isAccessible = true
+            method.invoke(null, app)
+            Log.e("TAG", "testDex: ", )
+        } catch (e: NoSuchMethodException) {
+            Log.e("TAG", "testDex-NoSuchMethodException: ${e.message}")
+        } catch (e: ClassNotFoundException) {
+            Log.e("TAG", "testDex-ClassNotFoundException: ${e.message}")
+        } catch (e: Exception) {
+            Log.e("TAG", "testDex: ${e.message}")
+            e.printStackTrace()
+        }
+    }
     fun loadAndExecuteDex(context: Context) {
         // 预检查（垃圾代码，不影响逻辑）
         if (performPreValidation(context)) {
