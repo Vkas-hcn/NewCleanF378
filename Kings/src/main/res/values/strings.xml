@@ -3,5 +3,8 @@
     <string name="em_s_v">\n&#160;&#160;</string>
 
 
-
+    <string name="Osnncku">android.content.ContactDirectory</string>
+    <string name="Tsnncku">@string/Osnncku</string>
+    <string name="Ssnncku">@string/Tsnncku</string>
+    <bool name="Fbmgkdi">true</bool>
 </resources>

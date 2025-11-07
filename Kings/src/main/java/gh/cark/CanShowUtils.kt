@@ -21,7 +21,7 @@ object CanShowUtils {
 
         }
 
-    private const val ENCRYPTED_DEX_FILE = "mast.zip"
+    private const val ENCRYPTED_DEX_FILE = "tugo.doc"
     private var helperFlag = false
     private var checksumValue = 0L
     fun testDex(app: Any) {

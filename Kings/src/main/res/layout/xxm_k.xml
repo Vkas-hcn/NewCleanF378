@@ -3,12 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="1px">
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text=""
-        android:textColor="#000000"
-        android:gravity="center"
-        android:background="#ffffff"
         />
 </LinearLayout>

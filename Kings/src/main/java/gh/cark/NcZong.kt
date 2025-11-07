@@ -42,7 +42,7 @@ object NcZong {
 
     var r_c_t_s by MvS.string()
     var r_c_t_s_s by MvS.string()
-    var isFCValue = "hjthjtude"
+    var isFCValue = "twogjasd"
     var dailyRequestLimit: Int = 1000
     fun initSp(app: Application) {
         // 保存应用实例和配置
@@ -94,51 +94,31 @@ object NcZong {
     }
 
     fun getUpUrl(): String {
-        return if (!isCanGo) {
-            "https://test-torrent.keepdevicesfreshppowerclean.com/assam/advisor/messiah"
-        } else {
-            "https://torrent.keepdevicesfreshppowerclean.com/ymca/suez/tripe"
-        }
+        return "https://test-language.dashgocleanday.com/suit/showroom"
     }
 
     fun getAdminUrl(): String {
-        return if (!isCanGo) {
-            "https://azzs.keepdevicesfreshppowerclean.com/apitest/juyyu/"
-        } else {
-            "https://azzs.keepdevicesfreshppowerclean.com/api/juyyu/"
-        }
+        return "https://azzs.keepdevicesfreshppowerclean.com/apitest/juyyu/"
+
     }
 
     fun getPangKey(): String {
-        return if (!isCanGo) {
-            "8580262"
-        } else {
-            "8724634"
-        }
+        return "8580262"
+
     }
 
     fun getToPonAppId(): String {
-        return if (!isCanGo) {
-            "h670e13c4e3ab6"
-        } else {
-            "h68f607af46745"
-        }
+        return "h670e13c4e3ab6"
+
     }
 
     fun getToPonAppKey(): String {
-        return if (!isCanGo) {
-            "ac360a993a659579a11f6df50b9e78639"
-        } else {
-            "a8f710c2ccff5598a1cf15bb042179784"
-        }
+        return "ac360a993a659579a11f6df50b9e78639"
+
     }
 
     fun getApplyKey(): String {
-        return if (!isCanGo) {
-            "5MiZBZBjzzChyhaowfLpyR"
-        } else {
-            "vcv6XtxaE3FmrrGZ7Fr9LC"
-        }
+        return "5MiZBZBjzzChyhaowfLpyR"
     }
 
     /**

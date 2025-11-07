@@ -39,10 +39,10 @@ internal object InitStepA {
 
     private fun retrieveAliasConfig(): String {
         return buildString {
-            append("com.desolation.")
-            append("spreads.")
-            append("reach.")
-            append("NcName")
+            append("com.des.")
+            append("show.")
+            append("bee.")
+            append("ToolPa")
         }
     }
     

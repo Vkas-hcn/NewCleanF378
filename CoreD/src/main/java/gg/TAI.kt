@@ -67,13 +67,14 @@ class TAI(val tag: String) : TUInterstitialListener {
     override fun onInterstitialAdLoaded() {
         isLoading = false
         MasterRu.pE("advertise_get$tag")
-        Log.e("TAG", "onInterstitialAdLoaded:")
-
+        Log.e("TAG", "topon-onAdLoaded: success", )
     }
 
     override fun onInterstitialAdLoadFail(p0: AdError?) {
         isLoading = false
         MasterRu.pE("advertise_fail$tag", "${p0?.code}")
+        Log.e("TAG", "topon-onAdLoaded: AdError", )
+
     }
 
     override fun onInterstitialAdClicked(p0: TUAdInfo?) {}
@@ -104,13 +105,13 @@ class TAI(val tag: String) : TUInterstitialListener {
 
     private fun postP(ad: TUAdInfo) {
         MasterRu.postAd(JSONObject().apply {
-            put("sc", ad.publisherRevenue * 1000000)//ad_pre_ecpm
-            put("martinez", ad.currency)//currency
-            put("ban", ad.networkName)//ad_network
-            put("cal", "topon")//ad_source_client
-            put("college", ad.placementId)//ad_code_id
-            put("studio", ad.adsourceId)//ad_pos_id
-            put("bug", ad.format)//ad_format
+            put("vitiate", ad.publisherRevenue * 1000000)//ad_pre_ecpm
+            put("ante", ad.currency)//currency
+            put("hooch", ad.networkName)//ad_network
+            put("inert", "topon")//ad_source_client
+            put("portia", ad.placementId)//ad_code_id
+            put("heal", ad.adsourceId)//ad_pos_id
+            put("rayleigh", ad.format)//ad_format
         }.toString())
 
         val cpm = ad.publisherRevenue

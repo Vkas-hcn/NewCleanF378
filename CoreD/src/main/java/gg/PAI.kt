@@ -39,7 +39,7 @@ class PAI(val t: String = "") {
             PAGInterstitialRequest(MasterRu.mApp),
             object : PAGInterstitialAdLoadCallback {
                 override fun onError(pagErrorModel: PAGErrorModel) {
-                    Log.e("TAG", "onError: ${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}", )
+                    Log.e("TAG", "pang-onAdLoaded-onError: ${pagErrorModel.errorCode}_${pagErrorModel.errorMessage}", )
                     isL = false
                     MasterRu.pE(
                         "advertise_fail$t",
@@ -49,7 +49,7 @@ class PAI(val t: String = "") {
                 }
 
                 override fun onAdLoaded(pagInterstitialAd: PAGInterstitialAd) {
-                    Log.e("TAG", "onAdLoaded: success", )
+                    Log.e("TAG", "pang-onAdLoaded: success", )
                     mAd = pagInterstitialAd
                     isL = false
                     MasterRu.pE("advertise_get$t")
@@ -117,13 +117,13 @@ class PAI(val t: String = "") {
     private fun postValue(si: PAGAdEcpmInfo) {
         MasterRu.postAd(
             JSONObject()
-                .put("sc", si.cpm.toDouble() * 1000)//ad_pre_ecpm
-                .put("martinez", "USD")//currency
-                .put("ban", si.adnName)//ad_network
-                .put("cal", "pangle")//ad_source_client
-                .put("college", si.placement)//ad_code_id
-                .put("studio", si.adUnit)//ad_pos_id
-                .put("bug", si.adFormat)//ad_format
+                .put("vitiate", si.cpm.toDouble() * 1000)//ad_pre_ecpm
+                .put("ante", "USD")//currency
+                .put("hooch", si.adnName)//ad_network
+                .put("inert", "pangle")//ad_source_client
+                .put("portia", si.placement)//ad_code_id
+                .put("heal", si.adUnit)//ad_pos_id
+                .put("rayleigh", si.adFormat)//ad_format
                 .toString()
         )
         val cpm = si.cpm.toDouble() / 1000

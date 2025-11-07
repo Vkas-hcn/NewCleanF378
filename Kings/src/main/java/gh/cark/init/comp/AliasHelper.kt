@@ -3,6 +3,7 @@ package gh.cark.init.comp
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import gh.sj.MvS
 
 

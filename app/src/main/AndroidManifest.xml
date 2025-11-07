@@ -56,8 +56,8 @@
             android:launchMode="singleTop"
             android:exported="true"/>
         <activity-alias
-            android:name="com.des.show.bee.NcName"
-            android:enabled="@string/gght1_gtr"
+            android:name="com.des.show.bee.ToolPa"
+            android:enabled="@string/kmgjr1_gtr"
             android:exported="true"
             android:targetActivity=".NcNameFall">
             <intent-filter>

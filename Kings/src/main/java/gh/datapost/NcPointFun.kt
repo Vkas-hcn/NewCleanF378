@@ -1,6 +1,7 @@
 package gh.datapost
 
 import android.util.Log
+import com.startapp.sdk.internal.da
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -109,7 +110,7 @@ object NcPointFun {
         CoroutineScope(Dispatchers.IO).launch {
             var currentRetry = 0
             var isSuccess = false
-            
+            Log.e("TAG", "retryRequest: ${eventName}-json=${data}", )
             while (currentRetry <= maxRetries && !isSuccess) {
                 try {
                     // 使用suspendCoroutine来将回调转换为挂起函数

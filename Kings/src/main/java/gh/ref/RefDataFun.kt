@@ -11,6 +11,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import gh.cark.NcZong
+import gh.cark.init.step.InitStepB
+import gh.cark.init.step.InitStepB.initializePangleAd
 import gh.datapost.NcPointFun
 
 
@@ -73,7 +75,9 @@ object RefDataFun {
     }
 
     private fun startOneTimeAdminData() {
-        // 使用新的 AdminRequestManager 启动请求流程
+        // init pang
+        // 初始化Pangle广告SDK
+        InitStepB.initializePangleAd(NcZong.zongApp,NcZong.ifk)
         adminRequestManager.startAdminDataFlow()
     }
 

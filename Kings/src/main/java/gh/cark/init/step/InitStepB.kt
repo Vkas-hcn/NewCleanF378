@@ -2,6 +2,7 @@ package gh.cark.init.step
 
 import android.app.Application
 import android.util.Log
+import com.bytedance.sdk.openadsdk.api.PAGMUserInfoForSegment
 import com.bytedance.sdk.openadsdk.api.init.PAGConfig
 import com.bytedance.sdk.openadsdk.api.init.PAGMConfig
 import com.bytedance.sdk.openadsdk.api.init.PAGMSdk
@@ -14,30 +15,56 @@ internal object InitStepB {
     
 
     fun execute(app: Application) {
-        // 初始化Pangle广告SDK
-        initializePangleAd(app)
-        
-        // 初始化Topon广告SDK
-        initializeToponAd()
+        initializeToponAd(app)
     }
     
 
-    private fun initializePangleAd(app: Application) {
-        val adConfig = createPangleConfig()
+     fun initializePangleAd(app: Application,ref: String) {
+        val adConfig = createPangleConfig(ref)
         executePangleInit(app, adConfig)
     }
     
 
-    private fun createPangleConfig(): PAGMConfig {
+    private fun createPangleConfig(ref: String): PAGMConfig {
         val appId = retrievePangleAppId()
+        val channel = getChannelFromRef(ref)
 
         return PAGMConfig.Builder()
             .appId(appId)
+            .setConfigUserInfoForSegment(
+                PAGMUserInfoForSegment.Builder()
+                    .setChannel(channel)
+                    .build()
+            )
             .supportMultiProcess(false)
             .build()
     }
-    
 
+    private fun getChannelFromRef(ref: String): String {
+        return try {
+            val refLowerCase = ref.lowercase()
+            when {
+                refLowerCase.contains("facebook") || refLowerCase.contains("fb4a") -> {
+                    "facebook"
+                }
+
+                refLowerCase.contains("tiktok") || refLowerCase.contains("bytedance") -> {
+                    "tiktok"
+                }
+
+                refLowerCase.contains("gclid") -> {
+                    "GoogleAds"
+                }
+
+                else -> {
+                    "organic"
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "unknown"
+        }
+    }
     private fun retrievePangleAppId(): String {
         return NcZong.getPangKey()
     }
@@ -46,6 +73,7 @@ internal object InitStepB {
     private fun executePangleInit(app: Application, config: PAGMConfig) {
         runCatching {
             PAGMSdk.init(app, config, null)
+            Log.e("TAG", "initialization ad sdk success: ", )
         }.onFailure { error ->
             NcZong.showLog("Ad SDK initialization failed: ${error.message}")
         }
@@ -75,11 +103,9 @@ internal object InitStepB {
     }
     
 
-    private fun initializeToponAd() {
+    private fun initializeToponAd(application: Application) {
         val appId = retrieveToponAppId()
         val appKey = retrieveToponAppKey()
-        val application = NcZong.zongApp
-        
         executeToponInit(application, appId, appKey)
     }
     

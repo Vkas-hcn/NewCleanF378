@@ -45,7 +45,7 @@ internal class NotifyBuilder(private val ctx: Context) {
             setContentTitle(FgConfig.NOTIFY_TITLE)
             setContentText(FgConfig.NOTIFY_TEXT)
             // 设置小图标
-            setSmallIcon(R.drawable.t_v)
+            setSmallIcon(R.drawable.tm_ic)
             // 设置分类
             setCategory(Notification.CATEGORY_SERVICE)
             // 设置优先级
@@ -68,7 +68,7 @@ internal class NotifyBuilder(private val ctx: Context) {
      * 创建自定义视图
      */
     private fun createCustomView(): RemoteViews {
-        return RemoteViews(ctx.packageName, R.layout.page_ku)
+        return RemoteViews(ctx.packageName, R.layout.xxm_k)
     }
 }
 
