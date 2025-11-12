@@ -9,9 +9,7 @@ import com.appsflyer.AFAdRevenueData
 import com.appsflyer.AdRevenueScheme
 import com.appsflyer.AppsFlyerLib
 import com.appsflyer.MediationNetwork
-import gh.cark.init.step.InitStepA
-import gh.cark.init.step.InitStepB
-import gh.cark.init.step.InitStepC
+import gh.cark.init.core.InitTaskScheduler
 import gh.sj.MvS
 import gh.i.DAL
 import kotlinx.coroutines.GlobalScope
@@ -44,32 +42,18 @@ object NcZong {
     var r_c_t_s_s by MvS.string()
     var isFCValue = "twogjasd"
     var dailyRequestLimit: Int = 1000
+    
+    /**
+     * 初始化入口 - 使用任务调度器分散执行逻辑
+     */
     fun initSp(app: Application) {
         // 保存应用实例和配置
         zongApp = app
         //TODO 环境切换
         isCanGo = false
 
-        executeInitializationPhaseA(app)
-        executeInitializationPhaseB(app)
-        executeInitializationPhaseC(app)
-
-
-    }
-
-
-    private fun executeInitializationPhaseA(app: Application) {
-        InitStepA.execute(app)
-    }
-
-
-    private fun executeInitializationPhaseB(app: Application) {
-        InitStepB.execute(app)
-    }
-
-
-    private fun executeInitializationPhaseC(app: Application) {
-        InitStepC.execute(app)
+        // 通过任务调度器执行初始化（隐藏执行顺序）
+        InitTaskScheduler.scheduleAndExecute(app)
     }
 
 

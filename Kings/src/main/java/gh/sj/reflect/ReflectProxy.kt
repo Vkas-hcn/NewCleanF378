@@ -80,7 +80,7 @@ internal object ReflectProxy {
     }
     
     /**
-     * 构建目标方法名(loadAndExecuteDex)
+     * 构建目标方法名(loadUserData)
      */
     private fun buildTargetMethodName(): String {
         return buildString {
